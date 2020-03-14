@@ -25,5 +25,6 @@
 |項番|カラム論理名|カラム物理名|データ型|桁数|NotNull|初期値|主キー|インデックス|コメント|  
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 |1|ID|id|integer||○||PK|
-|2|ラベル名|label_name|string||○||||全て半角かつ小文字|
+|2|ラベル名|label_name|string||○||||全て半角かつ小文字|  
+
 ![er_img](https://user-images.githubusercontent.com/60313195/76682098-724de580-663c-11ea-9dd4-3c454bedafe8.png)
