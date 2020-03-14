@@ -18,3 +18,4 @@
 |3|内容|content|text||○|
 |4|優先度|priority|integer||○|0|||0:未着手, 1: 着手中,2:完了|
 |5|ラベル|label|string||||||全て半角かつ小文字|
+|6|ユーザーID|user_id|||||FK||登録者のID|
