@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_params, only: [:show, :edit, :update]
+  before_action :set_params, only: [:show, :edit, :update, :destroy]
   def new
     @task = Task.new
   end
@@ -32,9 +32,10 @@ class TasksController < ApplicationController
       render :edit
     end
   end
-
-
-  def confirm
+  
+  def destroy
+    @task.destroy
+    redirect_to tasks_path, notice: '削除しました！'
   end
 
   private 
