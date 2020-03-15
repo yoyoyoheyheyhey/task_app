@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :set_params, only: [:show, :edit, :update]
   def new
     @task = Task.new
   end
@@ -22,6 +23,16 @@ class TasksController < ApplicationController
 
   def edit
   end
+
+  def update
+    if @task.update(task_params)
+      redirect_to tasks_path, notice: '更新に成功しました！'
+    else
+      flash.now[:danger] = '更新に失敗しました！'
+      render :edit
+    end
+  end
+
 
   def confirm
   end
