@@ -14,6 +14,7 @@ class TasksController < ApplicationController
   end
 
   def index
+    @tasks = Task.latest
   end
 
   def show
