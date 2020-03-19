@@ -32,11 +32,17 @@
 # Herokuへのデプロイ手順
 すでにアプリを作成している場合　3から進める
 1. heroku login
-1. heroku create
+1. heroku create  
 1. git add .
 1. git commit -m '変更内容'
-1. git push origin master
-1. git push heroku origin master
+1. git push origin 作業ブランチ名
+1. プルリクエストを行う。
+1. 承認された場合、GitHub上でmergeする。
+1. Githubの作業ブランチを削除する。
+1. git checkout master (Localにてmasterブランチに切り替える
+1. git pull origin master (差分を取り込む
+1. git branch -d ブランチ名 (Localの作業ブランチを削除する
+1. git push heroku master
 1. heroku run rails db:migrate
 
 # バージョン情報
