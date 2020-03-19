@@ -10,22 +10,22 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '作成されたタスクが表示されること' do
         # 一覧画面に遷移する
         visit root_path
-        expect(page).to have_content 'test Title1'
-        expect(page).to have_content 'test Content1'
+        expect(page).to have_content 'test Title'
+        expect(page).to have_content 'test Content'
       end
     end
     context '複数タスクを作成した場合' do
       before do
-        3.times do |n|
-          FactoryBot.create(:task)
-        end
+        task1 = FactoryBot.create(:task, title: 'test Title1', content: 'test Content1')
+        task2 = FactoryBot.create(:task, title: 'test Title2', content: 'test Content2')
+        task3 = FactoryBot.create(:task, title: 'test Title3', content: 'test Content3')
       end
       it "タスクが作成日時の降順に並んでいること" do
         visit root_path
         task_list = all('.task_title')
-        expect(task_list[0]).to have_content "test Title4"
-        expect(task_list[1]).to have_content "test Title3"
-        expect(task_list[2]).to have_content "test Title2"
+        expect(task_list[0]).to have_content "test Title3"
+        expect(task_list[1]).to have_content "test Title2"
+        expect(task_list[2]).to have_content "test Title1"
       end
     end
   end
@@ -53,11 +53,11 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '該当タスクの内容が表示されたページに遷移すること' do
         visit root_path
         click_link  'show_link'
-        expect(page).to have_content('test Title5')
-        expect(page).to have_content('test Content5')
+        expect(page).to have_content('test Title')
+        expect(page).to have_content('test Content')
         click_link 'back_show_link'
-        expect(page).to have_content('test Title5')
-        expect(page).to have_content('test Content5')
+        expect(page).to have_content('test Title')
+        expect(page).to have_content('test Content')
       end
     end
   end
@@ -85,13 +85,13 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '任意のタスクを削除した場合' do
       it '該当のタスクが削除され、一覧ページに遷移すること' do
         visit root_path
-        expect(page).to have_content 'test Title7'
-        expect(page).to have_content 'test Content7'
+        expect(page).to have_content 'test Title'
+        expect(page).to have_content 'test Content'
         click_link 'delete_link'
         page.accept_confirm '削除してもよろしいですか？'
         expect(page).to have_content '削除しました！'
-        expect(page).to_not have_content 'test Title7'
-        expect(page).to_not have_content 'test Content7'
+        expect(page).to_not have_content 'test Title'
+        expect(page).to_not have_content 'test Content'
       end
     end
   end
