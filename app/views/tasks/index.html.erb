@@ -6,8 +6,8 @@
       <th>タイトル</th>
     </tr>
     <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.title %></td>
+      <tr class="task">
+        <td class="task_title"><%= task.title %></td>
         <td><%= task.content %></td>
         <td><%= link_to '詳細', task_path(task.id), id: 'show_link' %></td>
         <td><%= link_to '編集', edit_task_path(task.id), id: 'edit_link' %></td>
