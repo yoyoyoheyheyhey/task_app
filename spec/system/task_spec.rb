@@ -28,6 +28,12 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(task_list[2]).to have_content "test Title1"
       end
     end
+    context '終了期限でソートを押した場合' do
+      before do
+      end
+      it 'タスクの並び順が終了期限の降順で並んでいること' do
+      end
+    end
   end
 
   describe 'タスク登録画面' do

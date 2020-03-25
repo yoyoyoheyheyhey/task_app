@@ -1,5 +1,6 @@
 <div class="index">
   <%= link_to 'タスク作成', new_task_path, id: 'new_link' %>
+  <%= link_to '終了期限でソートする', tasks_path(end_date: 'true'), meshod: :post %>
   <table>
     <tr>
       <th>内容</th>

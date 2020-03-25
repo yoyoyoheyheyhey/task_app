@@ -15,7 +15,11 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = Task.latest
+    if params[:end_date]
+      @tasks = Task.all.order(end_date: :desc)
+    else
+      @tasks = Task.latest
+    end
   end
 
   def show
