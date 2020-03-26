@@ -1,5 +1,6 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
+  wait = Selenium::WebDriver::Wait.new(:timeout => 100) 
 
   describe 'タスク機能一覧' do
     context 'タスクを作成した場合' do
@@ -16,22 +17,76 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context '複数タスクを作成した場合' do
       before do
-        task1 = FactoryBot.create(:task, title: 'test Title1', content: 'test Content1')
-        task2 = FactoryBot.create(:task, title: 'test Title2', content: 'test Content2')
-        task3 = FactoryBot.create(:task, title: 'test Title3', content: 'test Content3')
+        task1 = FactoryBot.create(:task, title: 'test Title1', content: 'test Content1',priority: 0)
+        task2 = FactoryBot.create(:task, title: 'test Title2', content: 'test Content2',priority: 2)
+        task3 = FactoryBot.create(:task, title: 'test Title3', content: 'test Content3',priority: 1)
       end
-      it "タスクが作成日時の降順に並んでいること" do
+      it "タスクが優先度順に並んでいること" do
         visit root_path
         task_list = all('.task_title')
-        expect(task_list[0]).to have_content "test Title3"
-        expect(task_list[1]).to have_content "test Title2"
+        expect(task_list[0]).to have_content "test Title2"
+        expect(task_list[1]).to have_content "test Title3"
         expect(task_list[2]).to have_content "test Title1"
       end
     end
     context '終了期限でソートを押した場合' do
       before do
+        task = FactoryBot.create(:task, title: 'third title', content: 'third content', end_date: '2030-12-01')
+        task = FactoryBot.create(:task, title: 'first title', content: 'first content', end_date: '1990-12-01')
+        task = FactoryBot.create(:task, title: 'second title', content: 'second content', end_date: '2020-12-01')
       end
       it 'タスクの並び順が終了期限の降順で並んでいること' do
+        visit root_path
+        click_link '終了期限でソートする'
+        task_list = all('.task_title')
+        expect(task_list[0]).to have_content 'third title'
+        expect(task_list[1]).to have_content 'second title'
+        expect(task_list[2]).to have_content 'first title'
+      end
+    end
+    context '検索ボタンを押した場合' do
+      before do
+        task = FactoryBot.create(:task, title: 'third title', content: 'third content', end_date: '2030-12-01')
+        task = FactoryBot.create(:task, title: 'first title', content: 'first content', end_date: '1990-12-01')
+        task = FactoryBot.create(:task, title: 'second title', content: 'second content', end_date: '2020-12-01')
+        task = FactoryBot.create(:task, title: 'status', content: 'second content', end_date: '2020-12-01', status: '着手中')
+        task = FactoryBot.create(:task, title: 'status1', content: 'second content', end_date: '2020-12-01', status: '着手中')
+      end
+      it '検索条件に該当したタイトルのみ表示されていること' do
+        visit root_path
+        fill_in 'title', with: 'third title'
+        click_button '検索'
+        task_list = all('.task_title')
+        expect(task_list[0]).to have_content 'third title'
+      end
+      it '検索条件に該当しないタイトルは表示されていないこと' do
+        visit root_path
+        fill_in 'title', with: 'third title'
+        click_button '検索'
+        task_list = all('.task_title')
+        expect(task_list[0]).to_not have_content 'second content'
+      end
+      it 'ステータスに該当するタイトルのみ表示すること' do
+        visit root_path
+        select '着手中', from: 'status'
+        click_button '検索'
+        task_list = all('.task_title')
+        expect(task_list[0]).to have_content 'status'
+      end
+      it 'ステータスに該当しないタイトルは表示されないこと' do
+        visit root_path
+        select '着手中', from: 'status'
+        click_button '検索'
+        task_list = all('.task_title')
+        expect(task_list[0]).to_not have_content "second content"
+      end
+      it '複合的な検索条件に該当するタイトルのみ表示すること' do
+        visit root_path
+        select '着手中', from: 'status'
+        click_button '検索'
+        task_list = all('.task_title')
+        wait.until { expect(task_list[0]).to have_content "status1" }
+        wait.until { expect(task_list[1]).to have_content "status" }
       end
     end
   end

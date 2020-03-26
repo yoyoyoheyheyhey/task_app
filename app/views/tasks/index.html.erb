@@ -1,6 +1,16 @@
 <div class="index">
+
+  <%= form_with(model: @task, local: true, method: :get) do |f|%>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%=  f.select :status, [["全て", "全て"],["未着手", "未着手"],["着手中", "着手中"],["完了", "完了"]] %>
+    <%=  f.select :sort_option, [["低", 0],["中", 1],["高", 2]], name: :sort_option %>
+
+    <%= f.submit "検索",name: 'search' %>
+    <%= link_to '終了期限でソートする', tasks_path(sort_option: 'end_date'), meshod: :post %>
+  <% end %>
   <%= link_to 'タスク作成', new_task_path, id: 'new_link' %>
-  <%= link_to '終了期限でソートする', tasks_path(end_date: 'true'), meshod: :post %>
   <table>
     <tr>
       <th>内容</th>
@@ -10,6 +20,10 @@
       <tr class="task">
         <td class="task_title"><%= task.title %></td>
         <td><%= task.content %></td>
+        <td><%= task.created_at %></td>
+        <td><%= task.end_date %></td>
+        <td><%= task.status %></td>
+        <td><%= task.priority %></td>
         <td><%= link_to '詳細', task_path(task.id), id: 'show_link' %></td>
         <td><%= link_to '編集', edit_task_path(task.id), id: 'edit_link' %></td>
         <td><%= link_to '削除', task_path(task.id), method: :delete, data: {confirm: '削除してもよろしいですか？'} , id: 'delete_link'%></td>
