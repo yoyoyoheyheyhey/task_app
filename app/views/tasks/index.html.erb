@@ -11,6 +11,10 @@
     <%= link_to '終了期限でソートする', tasks_path(sort_option: 'end_date'), meshod: :post %>
   <% end %>
   <%= link_to 'タスク作成', new_task_path, id: 'new_link' %>
+  <div>
+    <%= paginate @tasks %>
+    <%= page_entries_info @tasks %>
+  </div>
   <table>
     <tr>
       <th>内容</th>

@@ -15,10 +15,15 @@ class TasksController < ApplicationController
   end
 
   def index
-    # binding.irb
+  #   @tasks = Task.with_title(params[:title])
+  #                .with_status(params[:status])
+  #                .sorted_by(params[:sort_option])
+
     @tasks = Task.with_title(params[:title])
                  .with_status(params[:status])
-                 .sorted_by(params[:sort_option])
+                 .sorted_by(params[:sort_option]).page(params[:page])
+
+
   end
 
   def show

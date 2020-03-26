@@ -37,9 +37,9 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
       it 'タスクの並び順が終了期限の降順で並んでいること' do
         visit root_path
-        click_link '終了期限でソートする'
+        wait.until {click_link '終了期限でソートする' }
         task_list = all('.task_title')
-        expect(task_list[0]).to have_content 'third title'
+        wait.until {expect(task_list[0]).to have_content 'third title'}
         expect(task_list[1]).to have_content 'second title'
         expect(task_list[2]).to have_content 'first title'
       end
@@ -153,6 +153,23 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(page).to have_content '削除しました！'
         expect(page).to_not have_content 'test Title'
         expect(page).to_not have_content 'test Content'
+      end
+    end
+  end
+  describe "ページネーションの機能" do
+    before do
+      26.times do |n|
+        FactoryBot.create(:task, title: "test Title#{n}")
+      end
+    end
+    context "最大レコード数を超えた場合" do
+      it "最大表示数の最終レコードが表示されていること" do
+        visit root_path
+        expect(page).to have_content "test Title25"
+      end
+      it "超えたレコードは表示されないこと" do
+        visit root_path
+        expect(page).to_not have_content "test Title26"
       end
     end
   end
