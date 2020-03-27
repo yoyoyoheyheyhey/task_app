@@ -8,11 +8,25 @@
         <% end %>
       </ul>
     <% end %>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-    <%= f.label :content %>
-    <%= f.text_field :content %>
-    <%= f.submit '登録', id: 'create_button' %>
-    <%= link_to '戻る', tasks_path %>
+    <%= f.label :title, class: 'label-control' %>
+    <%= f.text_field :title ,class: 'form-control'%>
+    <%= f.label :content, class: 'label-control' %>
+    <%= f.text_field :content, class: 'form-control' %>
+
+    <%= f.label :end_date, class: 'label-control' %>
+    <%= f.date_select(:end_date, { 
+                                   use_month_numbers: true,
+                                   start_year: Time.now.year,
+                                   end_year: (Time.now.year + 100)},
+                                 {
+                                  class: 'form-control  bootstrap-date'
+                                 }
+                               )%><br>
+    <%= f.label :status , class: 'label-control'%>
+    <%=  f.select :status, [["未着手", "未着手"],["着手中", "着手中"],["完了", "完了"]] , {}, class: 'form-control'%>
+    <%= f.label :priority, '優先順位' , class: 'label-control'%>
+    <%=  f.select :priority, [["低", 0],["中", 1],["高", 2]], {}, class: 'form-control'%>
+    <%= f.submit '登録', id: 'create_button', class: 'btn btn-primary' %>
+    <%= link_to '戻る', tasks_path , class: 'btn btn-success'%>
   <% end %>
 </div>

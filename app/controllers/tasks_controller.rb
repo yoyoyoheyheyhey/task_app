@@ -15,7 +15,9 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = Task.latest
+    @tasks = Task.with_title(params[:title])
+                 .with_status(params[:status])
+                 .sorted_by(params[:sort_option]).page(params[:page])
   end
 
   def show
@@ -40,7 +42,7 @@ class TasksController < ApplicationController
 
   private 
   def task_params
-    params.require(:task).permit(:title, :content)
+    params.require(:task).permit(:title, :content, :end_date, :status, :priority)
   end
 
   def set_params

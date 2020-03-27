@@ -1,17 +1,42 @@
 <div class="index">
-  <%= link_to 'タスク作成', new_task_path, id: 'new_link' %>
-  <table>
-    <tr>
+  <h1>タスク一覧</h1>
+  <%= form_with(model: @task, local: true, method: :get) do |f|%>
+    <div class="form-group inline">
+      <div class="row">
+        <div class="col-xs-10">
+        <%= f.label :title, "タイトル" %>
+        <%= f.text_field :title , class: 'form-inline'%>
+        <%= f.label :status, "状態" %>
+        <%=  f.select :status, [["全て", "全て"],["未着手", "未着手"],["着手中", "着手中"],["完了", "完了"]] %>
+        <%= f.label :sort_option, "優先順位" %>
+        <%=  f.select :sort_option, [["低", 0],["中", 1],["高", 2]], name: :sort_option %>
+        <%= f.submit "検索",name: 'search',class: "btn btn-primary h-25 inline" %>
+        <%= link_to '終了期限でソート', tasks_path(sort_option: 'end_date'), meshod: :post ,class: 'btn btn-primary inline'%>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+  <%= link_to 'タスク作成', new_task_path, id: 'new_link', class: 'btn btn-primary' %>
+  <div>
+    <%= paginate @tasks %>
+    <%= page_entries_info @tasks %>
+  </div>
+  <table >
+    <tr class="border-header">
       <th>内容</th>
       <th>タイトル</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
     <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.title %></td>
-        <td><%= task.content %></td>
-        <td><%= link_to '詳細', task_path(task.id), id: 'show_link' %></td>
-        <td><%= link_to '編集', edit_task_path(task.id), id: 'edit_link' %></td>
-        <td><%= link_to '削除', task_path(task.id), method: :delete, data: {confirm: '削除してもよろしいですか？'} , id: 'delete_link'%></td>
+      <tr class="border-content">
+        <td class="task_title form-inline"><%= task.title %></td>
+        <td class="task_content form-inline"><%= task.content %></td>
+        <td><%= link_to '詳細', task_path(task.id), id: 'show_link', class: 'btn btn-info'%></td>
+        <td><%= link_to '編集', edit_task_path(task.id), id: 'edit_link', class: 'btn btn-success'%></td>
+        <td><%= link_to '削除', task_path(task.id), method: :delete, data: {confirm: '削除してもよろしいですか？'} , id: 'delete_link', class: 'btn btn-danger'%></td>
       </tr>
     <% end %>
   </table>

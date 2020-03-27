@@ -1,0 +1,28 @@
+ja:
+  activerecord:
+    models:
+      task: タスク
+    attributes:
+      task:
+        title: タイトル
+        content: 内容
+        end_date: 終了期限
+        status: 状態
+        sort_option: 優先順位
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "%{entry_name}がありません"
+          one: "1件の%{entry_name}が表示されています"
+          other: "%{count}件の%{entry_name}が表示されています"
+      more_pages:
+        display_entries: " %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> までを表示中　全体で <b>%{total}</b> 件"
+            

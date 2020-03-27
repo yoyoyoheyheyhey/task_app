@@ -13,8 +13,9 @@
       <%= content_tag(:div,value,class: key) %>
     <% end %>
   </head>
-
-  <body>
-    <%= yield %>
-  </body>
+  <div class="wrapper">
+    <body>
+      <%= yield %>
+    </body>
+  </div>
 </html>

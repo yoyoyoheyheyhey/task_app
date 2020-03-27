@@ -1,9 +1,30 @@
 .form {
-  max-width: 25%;
+  max-width: 50%;
   margin: auto;
 }
 
 .form input {
   display: block;
   margin-bottom: 10px;
+}
+
+.form label {
+  display: block;
+}
+.form select {
+  margin-bottom: 10px;
+}
+
+.bootstrap-date {
+  display: inline-block;
+  width: 32.9%;
+}
+
+.new h1 {
+  position: relative;
+  left: 25%;
+}
+.edit h1{
+  position: relative;
+  left: 25%;
 }
