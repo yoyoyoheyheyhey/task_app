@@ -13,8 +13,8 @@
         <div class="container-fluid">
           <div class="navbar-header">
             <% if logged_in? %>
-              <%= link_to 'Profill', user_path(current_user.id),class: '' %>
-              <%= link_to 'Logout', session_path(current_user.id),method: :delete ,data: {confirmation: 'ログアウトしてもよろしいですか？'}%>
+              <%= link_to 'プロフィール', user_path(current_user.id),class: '' %>
+              <%= link_to 'ログアウト', session_path(current_user.id),method: :delete ,data: {confirmation: 'ログアウトしてもよろしいですか？'}%>
             <% else %>
             <% end %>
           </div>
