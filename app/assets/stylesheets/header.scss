@@ -1,0 +1,26 @@
+.header a {
+  font-size: 2rem;
+  padding: 10px;
+  position: relative;
+  top: 5px;
+  left: 200%;
+
+}
+.notice {
+  max-width: 50%;
+  margin: auto;
+  text-align: center;
+  background-color: #BAD3FF;
+  color: #666666;
+  font-size: 2rem;
+  padding: 10px;
+}
+.danger {
+  max-width: 50%;
+  margin: auto;
+  text-align: center;
+  background-color: #FADBDA;
+  font-size: 2rem;
+  color: #666666;
+  padding: 10px;
+}

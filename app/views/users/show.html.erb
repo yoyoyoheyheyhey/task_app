@@ -1,2 +1,13 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="form">
+  <h1>ユーザー詳細</h1>
+  <label for="user_show_title">タイトル</label>
+  <p id = "user_show_title", class="form-control"><%= @user.name %></p>
+  <label for="user_show_content">内容</label>
+  <p id = "user_show_content", class="form-control"><%= @user.email %></p>
+  <label for="user_show_created_at">作成日</label>
+  <p id = "user_show_created_at", class="form-control"><%= @user.created_at %></p>
+  <label for="user_show_updated_at">更新日</label>
+  <p id = "user_show_updated_at", class="form-control"><%= @user.updated_at %></p>
+  <%= link_to '編集', edit_user_path(@user.id), id: 'edit_link', class: 'btn btn-primary show'%>
+  <%= link_to '戻る', users_path ,id: 'back_show_link', class: 'btn btn-success'%>
+</div>
