@@ -35,10 +35,9 @@ RSpec.describe 'タスク管理機能', type: :system do
         task = FactoryBot.create(:task, title: 'first title', content: 'first content', end_date: '1990-12-01')
         task = FactoryBot.create(:task, title: 'second title', content: 'second content', end_date: '2020-12-01')
       end
-      it 'タスクの並び順が終了期限の降順で並んでいること' do
+      it 'タスクの並び順が終了期限の降順で並んでいること', :retry => 3 do
         visit root_path
         wait.until {click_link '終了期限でソート' }
-        sleep(3)
         task_list = all('.task_title')
         wait.until {expect(task_list[0]).to have_content 'third title'}
         wait.until {expect(task_list[1]).to have_content 'second title'}
