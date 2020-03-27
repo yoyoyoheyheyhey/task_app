@@ -17,15 +17,6 @@
               <%= link_to 'Profill', user_path(current_user.id),class: '' %>
               <%= link_to 'Logout', session_path(current_user.id),method: :delete ,data: {confirmation: 'ログアウトしてもよろしいですか？'}%>
             <% else %>
-              <div class="login">
-                <%= form_with(scope: :session,url: sessions_path,local: true) do |f| %>
-                  <%= f.label :email %>
-                  <%= f.email_field :email, class: 'form-inline' %>
-                  <%= f.label :password %>
-                  <%= f.password_field :password, class: 'form-inline' %>
-                  <%= f.submit 'ログイン', class: "btn btn-primary" %>
-                <% end %>
-              </div>
             <% end %>
           </div>
         </div>
