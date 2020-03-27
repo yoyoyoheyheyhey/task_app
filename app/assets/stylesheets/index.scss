@@ -1,9 +1,41 @@
-.form {
-  max-width: 25%;
+.index {
+  max-width: 60%;
   margin: auto;
+  position: relative;
+  left: 50px;
+
 }
 
-.form input {
-  display: block;
-  margin-bottom: 10px;
+.index .task_title {
+  width: 250px;
+}
+.index .task_content {
+  width: 250px;
+}
+
+.index .inline {
+  display: inline;
+}
+
+.index input {
+  margin-right: 1px;
+}
+
+.index select {
+  margin-right: 1px;
+}
+.index .h-25{
+  height: 1% !important;
+  margin: 10px;
+}
+
+.index td {
+  padding: 5px;
+}
+
+.index .border-header{
+  border-bottom:1px solid #ccc;
+}
+.index .border-content{
+  border-bottom:1px dashed #ccc;
 }

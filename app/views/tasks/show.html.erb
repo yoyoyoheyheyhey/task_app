@@ -1,5 +1,18 @@
 <div class="form">
-  <p><%= @task.title %></p>
-  <p><%= @task.content %></p>
-  <%= link_to '戻る', tasks_path ,id: 'back_show_link'%>
+  <h1>タスク詳細</h1>
+  <label for="task_show_title">タイトル</label>
+  <p id = "task_show_title", class="form-control"><%= @task.title %></p>
+  <label for="task_show_content">内容</label>
+  <p id = "task_show_content", class="form-control"><%= @task.content %></p>
+  <label for="task_show_end_date">締切日</label>
+  <p id = "task_show_end_date", class="form-control"><%= @task.end_date %></p>
+  <label for="task_show_status">状態</label>
+  <p id = "task_show_status", class="form-control"><%= @task.status %></p>
+  <label for="task_show_priority">優先順位</label>
+  <p id = "task_show_priority", class="form-control"><%= @task.priority %></p>
+  <label for="task_show_created_at">作成日</label>
+  <p id = "task_show_created_at", class="form-control"><%= @task.created_at %></p>
+  <label for="task_show_updated_at">更新日</label>
+  <p id = "task_show_updated_at", class="form-control"><%= @task.updated_at %></p>
+  <%= link_to '戻る', tasks_path ,id: 'back_show_link', class: 'btn btn-success'%>
 </div>

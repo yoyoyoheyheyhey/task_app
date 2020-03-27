@@ -37,11 +37,11 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
       it 'タスクの並び順が終了期限の降順で並んでいること' do
         visit root_path
-        wait.until {click_link '終了期限でソートする' }
+        wait.until {click_link '終了期限でソート' }
         task_list = all('.task_title')
         wait.until {expect(task_list[0]).to have_content 'third title'}
-        expect(task_list[1]).to have_content 'second title'
-        expect(task_list[2]).to have_content 'first title'
+        wait.until {expect(task_list[1]).to have_content 'second title'}
+        wait.until {expect(task_list[2]).to have_content 'first title'}
       end
     end
     context '検索ボタンを押した場合' do
