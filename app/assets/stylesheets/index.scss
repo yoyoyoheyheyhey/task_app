@@ -6,6 +6,7 @@
 
 }
 
+// task
 .index .task_title {
   width: 250px;
 }
@@ -15,7 +16,16 @@
 .index .task_end_date {
   width: 250px;
 }
+// user
 
+.index .user_name {
+  width: 250px;
+}
+.index .user_email {
+  width: 250px;
+}
+
+// task
 .index .inline {
   display: inline;
 }
