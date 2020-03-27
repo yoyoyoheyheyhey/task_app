@@ -5,7 +5,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    # @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       redirect_to tasks_path, notice: '登録が完了しました！'
     else
@@ -27,7 +28,8 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @task.update(task_params)
+    # if @task.update(task_params)
+    if current_user.tasks.update(task_params)
       redirect_to tasks_path, notice: '更新に成功しました！'
     else
       flash.now[:danger] = '更新に失敗しました！'

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :login_check, only:[:new,:create]
   before_action :set_params, only: [:show, :edit, :update, :destroy]
   def new
     @user = User.new
