@@ -24,9 +24,9 @@ RSpec.describe 'タスク管理機能', type: :system do
       it "タスクが優先度順に並んでいること" do
         visit root_path
         task_list = all('.task_title')
-        expect(task_list[0]).to have_content "test Title2"
-        expect(task_list[1]).to have_content "test Title3"
-        expect(task_list[2]).to have_content "test Title1"
+        wait.until {expect(task_list[0]).to have_content "test Title2" }
+        wait.until {expect(task_list[1]).to have_content "test Title3" }
+        wait.until {expect(task_list[2]).to have_content "test Title1" }
       end
     end
     context '終了期限でソートを押した場合' do
@@ -38,6 +38,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it 'タスクの並び順が終了期限の降順で並んでいること' do
         visit root_path
         wait.until {click_link '終了期限でソート' }
+        sleep(3)
         task_list = all('.task_title')
         wait.until {expect(task_list[0]).to have_content 'third title'}
         wait.until {expect(task_list[1]).to have_content 'second title'}
