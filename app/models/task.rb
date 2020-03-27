@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  belongs_to :user
+
   scope :with_title, -> (title) do
     next if title.blank?
     where("title Like ?", "%#{title}%")
