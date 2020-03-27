@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_params, only: [:show, :edit, :destroy]
+  before_action :set_params, only: [:show, :edit, :update, :destroy]
   def new
     @user = User.new
   end
@@ -18,6 +18,15 @@ class UsersController < ApplicationController
   end
 
   def edit
+  end
+
+  def update
+    if @user.update(user_params)
+      redirect_to tasks_path, notice: 'ユーザー情報を更新しました！'
+    else
+      flash.now[:danger] = '更新に失敗しました！'
+      render :edit
+    end
   end
 
   def index
