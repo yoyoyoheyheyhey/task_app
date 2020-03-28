@@ -4,16 +4,16 @@ RSpec.describe "Users", type: :system do
 
   wait = Selenium::WebDriver::Wait.new(:timeout => 100) 
 
-  describe '一般ユーザー登録' do
-    context '一般ユーザーを作成した時' do
-      it '作成された一般ユーザーが表示されること', :retry => 3 do
+  describe '一般ユーザー' do
+    context '一般ユーザーにて登録した場合' do
+      it 'タスク一覧画面表示されること', :retry => 3 do
         visit new_user_path
         fill_in "user_name", with: 'test User1'
         fill_in "user_email", with: 'test1@example.com'
         fill_in "user_password", with: 'testtest'
         fill_in "user_password_confirmation", with: 'testtest'
         click_button "登録"
-        wait.until{ expect(page).to have_content "test User1" }
+        wait.until{ expect(page).to have_content "タスク一覧" }
       end
     end
     context '一般ユーザーがログアウトした場合' do
@@ -24,7 +24,7 @@ RSpec.describe "Users", type: :system do
         fill_in "user_password", with: 'testtest'
         fill_in "user_password_confirmation", with: 'testtest'
         click_button "登録"
-        wait.until{ expect(page).to have_content "test User1" }
+        wait.until{ expect(page).to have_content "タスク一覧" }
         click_link "ログアウト"
         wait.until{ expect(page).to have_content "ログアウトしました！" }
         visit tasks_path
@@ -40,7 +40,7 @@ RSpec.describe "Users", type: :system do
                                           password: "testtest",
                                           password_confirmation: "testtest")
   end
-  describe "管理者ユーザー新規登録" do
+  describe "管理者ユーザー" do
     context "管理者ユーザーにてログイン処理をした際" do
       it "管理者画面が表示されていること" do
         visit new_session_path

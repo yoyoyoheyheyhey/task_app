@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to users_path, notice: "ユーザーの新規登録が完了しました！"
+      redirect_to tasks_path, notice: "新規登録が完了しました！"
     else
       flash.now[:danger] = "登録に失敗しました！"
       render :new
@@ -17,22 +17,6 @@ class UsersController < ApplicationController
   end
 
   def show
-  end
-
-  def edit
-  end
-
-  def update
-    if @user.update(user_params)
-      redirect_to tasks_path, notice: 'ユーザー情報を更新しました！'
-    else
-      flash.now[:danger] = '更新に失敗しました！'
-      render :edit
-    end
-  end
-
-  def index
-    @users = User.all
   end
 
   private
