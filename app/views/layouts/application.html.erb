@@ -18,8 +18,10 @@
               <%= link_to 'プロフィール', admin_user_path(current_user.id), class: 'admin_loggedin_right' %>
               <%= link_to 'ログアウト', session_path(current_user.id),method: :delete ,data: {confirmation: 'ログアウトしてもよろしいですか？'}, class: 'admin_loggedin_right' %>
             <% elsif logged_in? %>
-              <%= link_to 'プロフィール', user_path(current_user.id), class: 'loggedin' %>
-              <%= link_to 'ログアウト', session_path(current_user.id),method: :delete ,data: {confirmation: 'ログアウトしてもよろしいですか？'}, class: 'loggedin' %>
+              <%= link_to 'タスク作成', new_task_path, id: 'new_link', class: 'btn btn-primary loggedin' %>
+              <%= link_to 'タスク一覧', tasks_path, class: 'btn btn-info loggedin' %>
+              <%= link_to 'プロフィール', user_path(current_user.id), class: 'loggedin_right' %>
+              <%= link_to 'ログアウト', session_path(current_user.id),method: :delete ,data: {confirmation: 'ログアウトしてもよろしいですか？'}, class: 'loggedin_right' %>
             <% else %>
               <%= link_to 'ログイン', new_session_path, class: 'login' %>
               <%= link_to 'サインイン', new_user_path, class: 'login' %>

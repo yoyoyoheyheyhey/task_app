@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :login_check, only:[:new,:create]
-  before_action :set_params, only: [:show, :edit, :update, :destroy]
+  before_action :user_page_check, only: [:show]
   def new
     @user = User.new
   end
@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   private
@@ -27,7 +28,7 @@ class UsersController < ApplicationController
                                  :password_confirmation)
   end
 
-  def set_params
-    @user = User.find(params[:id])
+  def user_page_check
+     redirect_to tasks_path unless current_user.id == params[:id].to_i
   end
 end

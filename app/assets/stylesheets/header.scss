@@ -1,9 +1,16 @@
 .header .loggedin {
-  font-size: 2rem;
-  padding: 10px;
+  font-size: 1.5rem;
+  padding: 5px;
   position: relative;
   top: 5px;
-  left: 155%;
+  left: 110%;
+}
+.header .loggedin_right {
+  font-size: 1.5rem;
+  padding: 5px;
+  position: relative;
+  top: 5px;
+  left: 285%;
 }
 .header .login {
   font-size: 2rem;

@@ -6,6 +6,8 @@ RSpec.describe "Users", type: :system do
 
   describe '一般ユーザー' do
     context '一般ユーザーにて登録した場合' do
+      before do
+      end
       it 'タスク一覧画面表示されること', :retry => 3 do
         visit new_user_path
         fill_in "user_name", with: 'test User1'
@@ -14,6 +16,32 @@ RSpec.describe "Users", type: :system do
         fill_in "user_password_confirmation", with: 'testtest'
         click_button "登録"
         wait.until{ expect(page).to have_content "タスク一覧" }
+      end
+    end
+    context "一般ユーザーがログインをした場合" do
+      before do
+        @user = FactoryBot.create(:user, name: 'test User1',
+                                        email: 'test1@example.com')
+        @task = FactoryBot.create(:task, title: "test Title 1",
+                                        user_id: @user.id)
+        @other = FactoryBot.create(:user, name: 'test User2',
+                                         email: 'test2@example.com')
+        @other_task = FactoryBot.create(:task, title: "test Title 2",
+                                              user_id: @other.id)
+        visit new_session_path
+        fill_in "session_email", with: "test1@example.com"
+        fill_in "session_password", with: "testtest"
+        click_button "ログイン"
+      end
+      it "自分のタスク一覧画面にリダイレクトされること" do
+        wait.until{ expect(page).to have_content "test Title 1" }
+        wait.until{ expect(page).to_not have_content "test Title 2" }
+      end
+
+      it "別ユーザーのマイページ(詳細)にアクセスした際、自分のタスク一覧画面にリダイレクトされること" do
+        visit user_path(@other.id)
+        wait.until{ expect(page).to have_content "test Title 1" }
+        wait.until{ expect(page).to_not have_content "test Title 2" }
       end
     end
     context '一般ユーザーがログアウトした場合' do
