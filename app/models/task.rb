@@ -1,6 +1,9 @@
 class Task < ApplicationRecord
   belongs_to :user
-
+  scope :with_user_id, -> (user_id) do
+    next if user_id.nil?
+    where(user_id: user_id)
+  end
   scope :with_title, -> (title) do
     next if title.blank?
     where("title Like ?", "%#{title}%")
@@ -8,7 +11,7 @@ class Task < ApplicationRecord
 
   scope :with_status, -> (status) do
     next if status.nil? || status.include?('全て')
-      where(status: status) 
+    where(status: status) 
   end
 
   scope :sorted_by, -> (sort_option) do

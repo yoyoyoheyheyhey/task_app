@@ -89,6 +89,9 @@ RSpec.describe "Users", type: :system do
                                             admin: false,
                                             password: "testtest",
                                             password_confirmation: "testtest")
+      FactoryBot.create(:task, title: "test User show",
+                               user_id: other_user1.id)
+
       visit new_session_path
       fill_in "session_email", with: "testadmin@example.com"
       fill_in "session_password", with: "testtest"
@@ -131,6 +134,12 @@ RSpec.describe "Users", type: :system do
         page.driver.browser.switch_to.alert.accept
         wait.until{ expect(page).to have_content "test UserAdmin" }
         wait.until{ expect(page).to_not have_content "test User1" }
+      end
+    end
+    context "ユーザーの詳細ボタンを押した場合" do
+      it "対象のユーザーのタスクが表示されていること" do
+        wait.until{ all('.border-content')[0].click_link "詳細" }
+        wait.until{ expect(page).to have_content "test User show" }
       end
     end
   end

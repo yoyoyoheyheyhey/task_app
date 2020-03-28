@@ -28,6 +28,10 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
+    @tasks = Task.with_user_id(params[:id])
+                 .with_title(params[:title])
+                 .with_status(params[:status])
+                 .sorted_by(params[:sort_option]).page(params[:page])
   end
 
   def index
