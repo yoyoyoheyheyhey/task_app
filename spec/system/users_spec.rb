@@ -141,6 +141,11 @@ RSpec.describe "Users", type: :system do
         wait.until{ expect(page).to have_content "test UserAdmin" }
         wait.until{ expect(page).to_not have_content "test User1" }
       end
+      it "管理者ユーザーは全て削除できないこと" do
+        wait.until{ all('.border-content')[1].click_link "削除" }
+        page.driver.browser.switch_to.alert.accept
+        wait.until{ expect(page).to have_content "管理者を全て削除することができません！" }
+      end
     end
     context "ユーザーの詳細ボタンを押した場合" do
       it "対象のユーザーのタスクが表示されていること" do
