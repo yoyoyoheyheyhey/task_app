@@ -23,6 +23,7 @@ class Admin::UsersController < ApplicationController
       redirect_to admin_users_path, notice: "#{@user.name}の情報を更新しました！"
     else
       flash.now[:danger] = "#{@user.name}の情報を更新できませんでした！"
+      render :new
     end
   end
 

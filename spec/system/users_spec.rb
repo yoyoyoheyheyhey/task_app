@@ -48,8 +48,23 @@ RSpec.describe "Users", type: :system do
         fill_in "session_password", with: "testtest"
         click_button "ログイン"
         wait.until { expect(page).to have_content "管理者としてログインしました！" }
-        
-
+      end
+    end
+    context "ユーザー新規で管理者権限を持つユーザーおん登録処理をした際" do
+      it "新しい管理者ユーザーが管理者画面に表示されること" do
+        visit new_session_path
+        fill_in "session_email", with: "testadmin@example.com"
+        fill_in "session_password", with: "testtest"
+        click_button "ログイン"
+        wait.until{ click_link "user_create" }
+        fill_in "user_name", with: "test User1"
+        fill_in "user_email", with: "test1@example.com"
+        check "user_admin"
+        fill_in "user_password", with: "testtest"
+        fill_in "user_password_confirmation", with: "testtest"
+        click_button "登録"
+        wait.until{ expect(page).to have_content "test User1" }
+        wait.until{ expect(page).to have_content "管理者" }
       end
     end
   end
