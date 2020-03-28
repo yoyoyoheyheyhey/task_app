@@ -43,9 +43,15 @@ RSpec.describe "Users", type: :system do
         wait.until{ expect(page).to have_content "test Title 1" }
         wait.until{ expect(page).to_not have_content "test Title 2" }
       end
+
       it "ログインしている状態で、登録画面にアクセスした場合、タスク一覧画面にリダイレクトされること" do
         visit new_user_path
         wait.until{ expect(page).to have_content "test Title 1" }
+      end
+
+      it "プロフィールリンクを押した際、対象のユーザーの詳細画面に遷移すること" do
+        click_link "プロフィール"
+        wait.until{ expect(page).to have_content "test User1" }
       end
     end
 
