@@ -48,6 +48,18 @@ RSpec.describe "Users", type: :system do
         wait.until{ expect(page).to have_content "test Title 1" }
       end
     end
+
+    context "一般ユーザーがログインしていない場合" do
+      before do
+        user = FactoryBot.create(:user)
+        task = FactoryBot.create(:task, user_id: user.id)
+      end
+      it "タスク一覧画面にアクセスした場合ログイン画面に遷移すること" do
+        visit tasks_path
+        wait.until{ expect(page).to have_content "ログイン画面" }
+      end
+    end
+
     context '一般ユーザーがログアウトした場合' do
       it "ログイン画面にリダイレクトされること", :retry => 3 do
         visit new_user_path
