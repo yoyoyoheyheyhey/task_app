@@ -16,7 +16,6 @@ RSpec.describe 'タスク管理機能', type: :system do
         @task = FactoryBot.create(:task,user_id: @user.id)
       end
       it '作成されたタスクが表示されること' do
-        # 一覧画面に遷移する
         visit tasks_path
         expect(page).to have_content 'test Title'
         expect(page).to have_content 'test Content'
@@ -146,6 +145,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
   end
+  
   describe 'タスクの削除' do
     before do
       FactoryBot.create(:task,user_id: @user.id)

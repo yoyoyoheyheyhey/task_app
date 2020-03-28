@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
-  skip_before_action :login_check
   before_action :set_params, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user_check
   def new
     @user = User.new
   end
@@ -55,7 +55,12 @@ class Admin::UsersController < ApplicationController
                                   :password,
                                   :password_confirmation)
   end
+
   def set_params
     @user = User.find(params[:id])
+  end
+
+  def admin_user_check
+    redirect_to new_user_path, flash: {danger: "あなたは管理者ではありません!"} unless current_user.admin?
   end
 end

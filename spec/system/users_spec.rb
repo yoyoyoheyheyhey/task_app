@@ -123,6 +123,7 @@ RSpec.describe "Users", type: :system do
         wait.until{ expect(page).to have_content "管理者" }
       end
     end
+
     context "ユーザーの更新処理をした場合" do
       it "変更後のユーザー情報が表示されていること" do
         wait.until{ all('.border-content')[0].click_link "編集" }
@@ -134,6 +135,7 @@ RSpec.describe "Users", type: :system do
         wait.until{ expect(page).to have_content "test Edit User" }
       end
     end
+
     context "ユーザーの削除処理をした場合" do
       it "ユーザー一覧画面に削除したユーザーが表示されていないこと" do
         wait.until{ all('.border-content')[0].click_link "削除" }
@@ -147,11 +149,26 @@ RSpec.describe "Users", type: :system do
         wait.until{ expect(page).to have_content "管理者を全て削除することができません！" }
       end
     end
+
     context "ユーザーの詳細ボタンを押した場合" do
       it "対象のユーザーのタスクが表示されていること" do
         wait.until{ all('.border-content')[0].click_link "詳細" }
         wait.until{ expect(page).to have_content "test User show" }
       end
     end
+
+    context "一般ユーザーが管理者画面にアクセスした場合" do
+      it "ログイン画面にリダイレクトすること" do
+        visit admin_users_path
+        click_link "ログアウト"
+        visit new_session_path
+        fill_in "session_email", with: "test1@example.com"
+        fill_in "session_password", with: "testtest"
+        click_button "ログイン"
+        visit admin_users_path
+        wait.until{ expect(page).to have_content "あなたは管理者ではありません!" }
+      end
+    end
+
   end
 end
