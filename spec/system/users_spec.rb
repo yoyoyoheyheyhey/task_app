@@ -77,38 +77,52 @@ RSpec.describe "Users", type: :system do
     end
   end
 
-  before do
-    admin_user = FactoryBot.create(:user, name: 'test UserAdmin',
-                                          email: 'testAdmin@example.com',
-                                          admin: true,
-                                          password: "testtest",
-                                          password_confirmation: "testtest")
-  end
   describe "管理者ユーザー" do
+    before do
+      admin_user = FactoryBot.create(:user, name: 'test UserAdmin',
+                                            email: 'testAdmin@example.com',
+                                            admin: true,
+                                            password: "testtest",
+                                            password_confirmation: "testtest")
+      other_user1 = FactoryBot.create(:user, name: 'test User1',
+                                            email: 'test1@example.com',
+                                            admin: false,
+                                            password: "testtest",
+                                            password_confirmation: "testtest")
+      visit new_session_path
+      fill_in "session_email", with: "testadmin@example.com"
+      fill_in "session_password", with: "testtest"
+      click_button "ログイン"
+    end
+
     context "管理者ユーザーにてログイン処理をした際" do
       it "管理者画面が表示されていること" do
-        visit new_session_path
-        fill_in "session_email", with: "testadmin@example.com"
-        fill_in "session_password", with: "testtest"
-        click_button "ログイン"
         wait.until { expect(page).to have_content "管理者としてログインしました！" }
       end
     end
-    context "ユーザー新規で管理者権限を持つユーザーおん登録処理をした際" do
-      it "新しい管理者ユーザーが管理者画面に表示されること" do
-        visit new_session_path
-        fill_in "session_email", with: "testadmin@example.com"
-        fill_in "session_password", with: "testtest"
-        click_button "ログイン"
+
+    context "新規でユーザー登録処理をした際" do
+      it "新しいユーザーが管理者画面に表示されること" do
         wait.until{ click_link "user_create" }
         fill_in "user_name", with: "test User1"
         fill_in "user_email", with: "test1@example.com"
         check "user_admin"
         fill_in "user_password", with: "testtest"
         fill_in "user_password_confirmation", with: "testtest"
-        click_button "登録"
+        click_button "登録する"
         wait.until{ expect(page).to have_content "test User1" }
         wait.until{ expect(page).to have_content "管理者" }
+      end
+    end
+    context "ユーザーの更新処理をした場合" do
+      it "変更後のユーザー情報が表示されていること" do
+        wait.until{ all('.border-content')[0].click_link "編集" }
+        fill_in "user_name", with: "test Edit User"
+        fill_in "user_email", with: "edit@example.com"
+        fill_in "user_password", with:"testtest"
+        fill_in "user_password_confirmation", with: "testtest"
+        click_button "更新する"
+        wait.until{ expect(page).to have_content "test Edit User" }
       end
     end
   end
