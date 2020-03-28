@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :login_check, only:[:new,:create]
   before_action :user_page_check, only: [:show]
+  before_action :new_user_page_check, only: [:new]
   def new
     @user = User.new
   end
@@ -30,5 +31,9 @@ class UsersController < ApplicationController
 
   def user_page_check
      redirect_to tasks_path unless current_user.id == params[:id].to_i
+  end
+
+  def new_user_page_check
+     redirect_to tasks_path if logged_in?
   end
 end
