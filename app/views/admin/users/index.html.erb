@@ -15,7 +15,7 @@
       <tr class="border-content">
         <td class="user_name"><%= user.name %></td>
         <td class="user_email"><%= user.email %></td>
-        <td class="user_tasks"><%= user.tasks.count %></td>
+          <td class="user_tasks"><%= user.tasks_count %></td>
         <td class="user_admin"><%= user.admin? ? "管理者" : "一般ユーザー" %></td>
         <td><%= link_to '詳細', admin_user_path(user.id), class: 'btn btn-info' %></td>
         <td><%= link_to '編集', edit_admin_user_path(user.id), class: 'btn btn-success' %></td>

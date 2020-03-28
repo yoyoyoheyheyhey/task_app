@@ -121,13 +121,13 @@ RSpec.describe "Users", type: :system do
         fill_in "user_email", with: "edit@example.com"
         fill_in "user_password", with:"testtest"
         fill_in "user_password_confirmation", with: "testtest"
-        click_button "更新する"
+        wait.until{ click_button "更新する" }
         wait.until{ expect(page).to have_content "test Edit User" }
       end
     end
     context "ユーザーの削除処理をした場合" do
       it "ユーザー一覧画面に削除したユーザーが表示されていないこと" do
-        wait.until{ all('.border-content')[1].click_link "削除" }
+        wait.until{ all('.border-content')[0].click_link "削除" }
         page.driver.browser.switch_to.alert.accept
         wait.until{ expect(page).to have_content "test UserAdmin" }
         wait.until{ expect(page).to_not have_content "test User1" }

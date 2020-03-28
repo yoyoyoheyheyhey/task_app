@@ -66,12 +66,12 @@ RSpec.describe 'タスク管理機能', type: :system do
         task_list = all('.task_title')
         expect(task_list[0]).to have_content 'third title'
       end
-      it '検索条件に該当しないタイトルは表示されていないこと' do
+      it '検索条件に該当しないタイトルは表示されていないこと', :retry => 3 do
         visit tasks_path
         fill_in 'title', with: 'third title'
         click_button '検索'
         task_list = all('.task_title')
-        expect(task_list[0]).to_not have_content 'second content'
+        wait.until{ expect(task_list[0]).to_not have_content 'second content' }
       end
       it 'ステータスに該当するタイトルのみ表示すること' do
         visit tasks_path
