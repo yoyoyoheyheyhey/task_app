@@ -12,7 +12,11 @@
       <div class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <% if logged_in? %>
+            <% if logged_in? && current_user.admin? %>
+              <%= link_to 'プロフィール', admin_user_path(current_user.id), class: 'admin_loggedin' %>
+              <%= link_to 'ユーザー一覧', admin_users_path(current_user.id), class: 'admin_loggedin' %>
+              <%= link_to 'ログアウト', session_path(current_user.id),method: :delete ,data: {confirmation: 'ログアウトしてもよろしいですか？'}, class: 'admin_loggedin' %>
+            <% elsif logged_in? %>
               <%= link_to 'プロフィール', user_path(current_user.id), class: 'loggedin' %>
               <%= link_to 'ログアウト', session_path(current_user.id),method: :delete ,data: {confirmation: 'ログアウトしてもよろしいですか？'}, class: 'loggedin' %>
             <% else %>

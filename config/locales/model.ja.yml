@@ -17,6 +17,7 @@ ja:
         password_confirmation: 確認用パスワード
         created_at: 作成日時
         updated_at: 更新日時
+        admin: 管理者権限
   views:
     pagination:
       first: "&laquo; 最初"

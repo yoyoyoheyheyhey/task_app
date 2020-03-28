@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   before_action :login_check
+
   def login_check
     redirect_to new_session_path unless logged_in?
   end
-  
 end

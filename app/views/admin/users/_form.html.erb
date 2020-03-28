@@ -1,0 +1,35 @@
+<div class="form">
+  <%= form_with(model: [:admin,@user], local: true) do |f| %>
+    <% if @user.errors.any? %>
+      <div class="errors_explanation">
+        <%= pluralize(@user.errors.count, 'error') %>
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control"%>
+    </div>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :admin %>
+      <%= f.check_box :admin, class: "form-check-input"%>
+    </div>
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </div>
+    <%= f.submit '登録', class: 'btn btn-primary' %>
+  <% end %>
+</div>
