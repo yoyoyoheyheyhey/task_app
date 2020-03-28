@@ -125,5 +125,13 @@ RSpec.describe "Users", type: :system do
         wait.until{ expect(page).to have_content "test Edit User" }
       end
     end
+    context "ユーザーの削除処理をした場合" do
+      it "ユーザー一覧画面に削除したユーザーが表示されていないこと" do
+        wait.until{ all('.border-content')[1].click_link "削除" }
+        page.driver.browser.switch_to.alert.accept
+        wait.until{ expect(page).to have_content "test UserAdmin" }
+        wait.until{ expect(page).to_not have_content "test User1" }
+      end
+    end
   end
 end
