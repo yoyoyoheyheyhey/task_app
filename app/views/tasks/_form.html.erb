@@ -14,14 +14,8 @@
     <%= f.text_field :content, class: 'form-control' %>
 
     <%= f.label :end_date, class: 'label-control' %>
-    <%= f.date_select(:end_date, { 
-                                   use_month_numbers: true,
-                                   start_year: Time.now.year,
-                                   end_year: (Time.now.year + 100)},
-                                 {
-                                  class: 'form-control  bootstrap-date'
-                                 }
-                               )%><br>
+    <%= f.date_field :end_date, value: Time.now.strftime("%Y年%m月%d日"),
+                                  class: 'form-control'%><br>
     <%= f.label :status , class: 'label-control'%>
     <%=  f.select :status, [["未着手", "未着手"],["着手中", "着手中"],["完了", "完了"]] , {}, class: 'form-control'%>
     <%= f.label :priority, '優先順位' , class: 'label-control'%>

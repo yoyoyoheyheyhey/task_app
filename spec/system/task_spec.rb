@@ -104,6 +104,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         click_link 'new_link'
         fill_in "task_title", with: 'test Title10'
         fill_in "task_content", with: 'test Content10'
+        fill_in "終了期限", with: "2020-01-30"
         click_button 'create_button'
         expect(page).to have_content '登録が完了しました！'
         expect(page).to have_content 'test Title10'
@@ -138,6 +139,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         click_link 'edit_link'
         fill_in 'task_title', with: 'test Title edit'
         fill_in 'task_content', with: 'test Content edit'
+        fill_in '終了期限', with: '2020-01-30'
         click_button 'create_button'
         expect(page).to have_content '更新に成功しました！'
         expect(page).to have_content 'test Title edit'
