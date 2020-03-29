@@ -124,9 +124,9 @@ RSpec.describe "Users", type: :system do
                                             password_confirmation: "testtest")
       FactoryBot.create(:task, title: "test User show",
                                user_id: other_user1.id)
-      FactoryBot.create(:task, title: "test User show",
+      FactoryBot.create(:task, title: "test User show2",
                                user_id: other_user1.id)
-      FactoryBot.create(:task, title: "test User show",
+      FactoryBot.create(:task, title: "test User show3",
                                user_id: other_user1.id)
 
       visit new_session_path
@@ -242,6 +242,15 @@ RSpec.describe "Users", type: :system do
         wait.until{ all(".border-content")[0].click_link "詳細" }
         wait.until{ all(".border-content")[0].click_link "詳細" }
         wait.until{ expect(page).to have_content "est User show" }
+      end
+    end
+    context "管理者ユーザーにて別ユーザーのタスクを削除した場合", :retry => 3 do
+      it "対象のユーザーのタスク一覧から対象のタスクが削除されていること" do
+        visit admin_users_path
+        wait.until{ all(".border-content")[0].click_link "詳細" }
+        wait.until{ all(".border-content")[0].click_link "削除" }
+        page.driver.browser.switch_to.alert.accept
+        wait.until{ expect(page).to_not have_content "test User show3" }
       end
     end
   end

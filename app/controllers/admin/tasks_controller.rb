@@ -36,6 +36,11 @@ class Admin::TasksController < ApplicationController
   def index
   end
 
+  def destroy
+    @task.destroy
+    redirect_to admin_user_path(@task.user_id), notice: "削除しました!"
+  end
+
   private
 
   def user_params
