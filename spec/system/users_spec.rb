@@ -224,5 +224,17 @@ RSpec.describe "Users", type: :system do
         wait.until{ expect(page).to have_content "test Title admin" }
       end
     end
+    context "管理者ユーザーにて別ユーザーのタスクの更新処理をした場合", :retry => 3 do
+      it "対象のユーザーのタスク一覧に更新した内容が表示されること" do
+        visit admin_users_path
+        wait.until{ all(".border-content")[0].click_link "詳細" }
+        wait.until{ all(".border-content")[0].click_link "編集" }
+        fill_in "task_title", with: 'test Title admin update'
+        fill_in "task_content", with: 'test Content admin update'
+        fill_in "終了期限", with: "2020-01-30"
+        click_button 'create_button'
+        wait.until{ expect(page).to have_content "test Content admin update" }
+      end
+    end
   end
 end

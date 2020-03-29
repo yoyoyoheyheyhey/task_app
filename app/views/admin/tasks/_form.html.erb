@@ -1,5 +1,5 @@
 <div class="form">
-  <%= form_with(model: @task, local: true,url: admin_tasks_path) do |f| %>
+  <%= form_with(model: @task, local: true,url: which_action) do |f| %>
     <% if @task.errors.any? %>
       <p><%= pluralize(@task.errors.count, 'error') %></p>
       <ul>
