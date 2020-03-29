@@ -244,10 +244,11 @@ RSpec.describe "Users", type: :system do
         wait.until{ expect(page).to have_content "est User show" }
       end
     end
-    context "管理者ユーザーにて別ユーザーのタスクを削除した場合", :retry => 3 do
+    context "管理者ユーザーにて別ユーザーのタスクを削除した場合", :retry => 5 do
       it "対象のユーザーのタスク一覧から対象のタスクが削除されていること" do
         visit admin_users_path
         wait.until{ all(".border-content")[0].click_link "詳細" }
+        sleep(1)
         wait.until{ all(".border-content")[0].click_link "削除" }
         page.driver.browser.switch_to.alert.accept
         wait.until{ expect(page).to_not have_content "test User show3" }

@@ -17,8 +17,7 @@ class Admin::TasksController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @task.update(user_params)
@@ -30,11 +29,7 @@ class Admin::TasksController < ApplicationController
   end
 
 
-  def show
-  end
-
-  def index
-  end
+  def show; end
 
   def destroy
     @task.destroy
