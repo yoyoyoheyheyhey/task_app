@@ -1,3 +1,12 @@
+# 動作確認ユーザー作成手順
+```
+bundle install
+rails db:create
+rails db:migrate
+rails db:seed
+rails server
+```
+
 # テーブル定義
 
 論理名: ユーザー  

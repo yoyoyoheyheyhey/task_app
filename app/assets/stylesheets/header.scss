@@ -1,41 +1,48 @@
-.header .loggedin {
-  font-size: 1.5rem;
-  padding: 5px;
-  position: relative;
-  top: 5px;
-  left: 110%;
+.header {
+  max-width: 75%;
+  margin: auto;
+  padding:10px;
 }
-.header .loggedin_right {
-  font-size: 1.5rem;
-  padding: 5px;
-  position: relative;
-  top: 5px;
-  left: 285%;
-}
-.header .login {
-  font-size: 2rem;
+
+.header .container {
+  max-width: 80%;
+  margin: auto;
   padding: 10px;
-  position: relative;
-  top: 5px;
-  left: 200%;
+  display: flex;
+  flex-wrap: nowrap;
+  box-shadow: 2px 2px 4px;
+}
+
+.header .container .left {
+  margin-top :5px;
+}
+.header .container .right {
+  font-size: 2rem;
+  margin-top: 10px;
+  margin-left: auto;
+}
+
+.flash {
+  margin: 10px;
 }
 
 .header .admin_loggedin {
   font-size: 1.5rem;
   padding: 5px;
   margin-right: 5px;
-  position: relative;
-  top: 5px;
-  left: 100%;
+  // position: relative;
+  // top: 5px;
+  // left: 65%;
 
 }
 
 .header .admin_loggedin_right {
   font-size: 1.5rem;
   padding: 5px;
-  position: relative;
-  top: 5px;
-  left: 280%;
+  margin-top: 5px;
+  // position: relative;
+  // top: 5px;
+  // left: 150%;
   
 }
 .notice {
