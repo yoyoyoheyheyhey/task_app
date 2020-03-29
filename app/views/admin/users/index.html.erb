@@ -1,4 +1,22 @@
 <div class="index">
+  <%= form_with(model: @user, local: true, method: :get) do |f|%>
+    <div class="form-group inline">
+      <div class="row">
+        <div class="col-xs-10">
+          <%= f.label :namne, "名前" %>
+          <%= f.text_field :name , class: 'form-inline'%>
+          <%= f.label :email, "メールアドレス" %>
+          <%=  f.email_field :email%>
+          <%= f.submit "検索",name: 'search',class: "btn btn-primary h-25 inline" %>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+  <div>
+    <%= paginate @users %>
+    <%= page_entries_info @users %>
+  </div>
   <h1>ユーザー一覧</h1>
   <table class="table table-hover">
     <thead class="thead-default">

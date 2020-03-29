@@ -35,7 +35,9 @@ class Admin::UsersController < ApplicationController
   end
 
   def index
-      @users = User.sorted_by
+      @users = User.with_name(params[:name])
+                   .with_email(params[:email])
+                   .sorted_by.page(params[:page])
   end
 
   def destroy

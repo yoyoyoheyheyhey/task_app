@@ -20,6 +20,16 @@ class User < ApplicationRecord
     select('users.id, name, email, admin, count(tasks.id) as tasks_count').
     group(:id).order("users.created_at desc")
   end
+
+  scope :with_name, -> (name) do
+    next if name.blank?
+    where("name LIKE ?", "%#{name}%")
+  end
+
+  scope :with_email, -> (email) do
+    next if email.blank?
+    where("email LIKE ?", "%#{email}%")
+  end
   
   def admin_user_exists?
     admin_user = User.where(admin: true).count 

@@ -254,5 +254,38 @@ RSpec.describe "Users", type: :system do
         wait.until{ expect(page).to_not have_content "test User show3" }
       end
     end
+    context "ユーザー一覧にて１画面で表示される最大数を超えた場合" do
+      before do
+        25.times do |n|
+          FactoryBot.create(:user,name: "test User #{n + 3}",
+                                  email: "test#{n + 3}@example.com")
+        end
+      end
+      it "最大数を超えたユーザーは表示されないこと" do
+        visit admin_users_path
+        wait.until{ expect(page).to_not have_content "test User1" }
+      end
+    end
+    context "ユーザー一覧にて検索処理を行なった場合" do
+      it "名前で検索すると対象のユーザーが表示されること" do
+        visit admin_users_path
+        fill_in "name", with: "test User1"
+        click_button "検索"
+        wait.until{ expect(page).to have_content "test User1" }
+      end
+      it "メールアドレスで検索すると対象のユーザーが表示されること" do
+        visit admin_users_path
+        fill_in "email", with: "test1@example.com"
+        click_button "検索"
+        wait.until{ expect(page).to have_content "test User1" }
+      end
+      it "複合した検索条件で検索すると対象のユーザーが表示されること" do
+        visit admin_users_path
+        fill_in "name", with: "test"
+        fill_in "email", with: "1@example.com"
+        click_button "検索"
+        wait.until{ expect(page).to have_content "test User1" }
+      end
+    end
   end
 end
