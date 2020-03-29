@@ -4,9 +4,13 @@ RSpec.describe "Users", type: :system do
 
   wait = Selenium::WebDriver::Wait.new(:timeout => 100) 
   describe '一般ユーザー' do
-    context "root_pathにアクセスした場合" do
-      it "ログイン画面が表示されること" do
+    context "ログイン画面に遷移するためのリクエストが複数存在する場合" do
+      it "root_pathでのアクセスでもログイン画面が表示されること" do
         visit root_path
+        wait.until{ expect(page).to have_content "ログイン画面" }
+      end
+      it "/loginでのアクセスでもログイン画面が表示されること" do
+        visit '/login'
         wait.until{ expect(page).to have_content "ログイン画面" }
       end
     end
