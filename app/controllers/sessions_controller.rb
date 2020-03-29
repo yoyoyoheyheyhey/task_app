@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :login_check
+  before_action :logged_in_check, only: [:new]
 
   def new; end
   
@@ -21,5 +22,10 @@ class SessionsController < ApplicationController
   def destroy
     session.delete(:user_id)
     redirect_to new_session_path,notice: 'ログアウトしました！'
+  end
+
+  private
+  def logged_in_check
+    redirect_to tasks_path if current_user.present?
   end
 end
