@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :tasks, dependent: :destroy
 
   scope :sorted_by, -> do
-    joins("LEFT OUTER JOIN tasks ON users.id = tasks.id").
+    joins("LEFT OUTER JOIN tasks ON users.id = tasks.user_id").
     select('users.id, name, email, admin, count(tasks.id) as tasks_count').
     group(:id).order("users.created_at desc")
   end

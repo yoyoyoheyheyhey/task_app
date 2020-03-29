@@ -124,6 +124,10 @@ RSpec.describe "Users", type: :system do
                                             password_confirmation: "testtest")
       FactoryBot.create(:task, title: "test User show",
                                user_id: other_user1.id)
+      FactoryBot.create(:task, title: "test User show",
+                               user_id: other_user1.id)
+      FactoryBot.create(:task, title: "test User show",
+                               user_id: other_user1.id)
 
       visit new_session_path
       fill_in "session_email", with: "testadmin@example.com"
@@ -201,6 +205,11 @@ RSpec.describe "Users", type: :system do
         wait.until{ expect(page).to have_content "あなたは管理者ではありません!" }
       end
     end
-
+    context "ユーザー一覧にてタスクを登録しているユーザーが存在した場合" do
+      it "タスクの合計が表示されていること" do
+        visit admin_users_path
+        expect(page).to have_content "3"
+      end
+    end
   end
 end
