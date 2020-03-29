@@ -236,5 +236,13 @@ RSpec.describe "Users", type: :system do
         wait.until{ expect(page).to have_content "test Content admin update" }
       end
     end
+    context "管理者ユーザーにて別ユーザーのタスクの詳細リンクを押した場合", :retry => 3 do
+      it "対象のユーザーのタスク詳細が閲覧できること" do
+        visit admin_users_path
+        wait.until{ all(".border-content")[0].click_link "詳細" }
+        wait.until{ all(".border-content")[0].click_link "詳細" }
+        wait.until{ expect(page).to have_content "est User show" }
+      end
+    end
   end
 end

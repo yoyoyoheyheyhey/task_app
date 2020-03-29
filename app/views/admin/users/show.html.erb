@@ -36,7 +36,7 @@
         <td class="task_title form-inline"><%= task.title %></td>
         <td class="task_content form-inline"><%= task.content %></td>
         <td class="task_end_date form-inline"><%= task.end_date.strftime("%Y年%m月%d日") %></td>
-        <td><%= link_to '詳細', task_path(task.id), id: 'show_link', class: 'btn btn-info'%></td>
+        <td><%= link_to '詳細', admin_task_path(task.id), id: 'show_link', class: 'btn btn-info'%></td>
         <td><%= link_to '編集', edit_admin_task_path(task.id), id: 'edit_link', class: 'btn btn-success'%></td>
         <td><%= link_to '削除', task_path(task.id), method: :delete, data: {confirm: '削除してもよろしいですか？'} , id: 'delete_link', class: 'btn btn-danger'%></td>
       </tr>
