@@ -3,8 +3,13 @@ require 'rails_helper'
 RSpec.describe "Users", type: :system do
 
   wait = Selenium::WebDriver::Wait.new(:timeout => 100) 
-
   describe '一般ユーザー' do
+    context "root_pathにアクセスした場合" do
+      it "ログイン画面が表示されること" do
+        visit root_path
+        wait.until{ expect(page).to have_content "ログイン画面" }
+      end
+    end
     context '一般ユーザーにて登録した場合' do
       before do
       end
@@ -114,13 +119,18 @@ RSpec.describe "Users", type: :system do
       it "新しいユーザーが管理者画面に表示されること" do
         wait.until{ click_link "user_create" }
         fill_in "user_name", with: "test User1"
-        fill_in "user_email", with: "test1@example.com"
+        fill_in "user_email", with: "testNew@example.com"
         check "user_admin"
         fill_in "user_password", with: "testtest"
         fill_in "user_password_confirmation", with: "testtest"
         click_button "登録する"
         wait.until{ expect(page).to have_content "test User1" }
         wait.until{ expect(page).to have_content "管理者" }
+      end
+      it "ユーザーの登録処理に失敗した場合、新規作成画面に遷移すること" do
+        wait.until{ click_link "user_create" }
+        click_button "登録する"
+        wait.until{ expect(page).to have_content "ユーザーの作成に失敗しました！" }
       end
     end
 

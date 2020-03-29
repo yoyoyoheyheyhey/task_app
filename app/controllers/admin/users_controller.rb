@@ -10,7 +10,7 @@ class Admin::UsersController < ApplicationController
     if @user.save
       redirect_to admin_users_path, notice: "#{@user.name}を作成しました！"
     else
-      flash.now[:danger] = "#{@user.name}の作成に失敗しました！"
+      flash.now[:danger] = "ユーザーの作成に失敗しました！"
       render :new
     end
   end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'session#new'
+  root to: 'sessions#new'
   namespace :admin do
     resources :users
   end
