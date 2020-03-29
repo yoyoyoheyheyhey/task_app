@@ -21,7 +21,6 @@
     <%= paginate @tasks %>
     <%= page_entries_info @tasks %>
   </div>
-  <%= link_to 'タスク作成', new_admin_task_path(@user.id), id: 'show_link', class: 'btn btn-primary general_user_task_create', id: 'general_user_task_create'%>
   <table >
     <tr class="border-header">
       <th>内容</th>

@@ -212,5 +212,17 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_content "3"
       end
     end
+    context "管理者ユーザーにて別ユーザーに対してタスクの登録処理をした場合" do
+      it "対象のユーザーのタスク一覧に作成したタスクが表示されること" do
+        visit admin_users_path
+        wait.until{ all(".border-content")[0].click_link "詳細" }
+        wait.until{ click_link "タスク作成" }
+        fill_in "task_title", with: 'test Title admin'
+        fill_in "task_content", with: 'test Content admin'
+        fill_in "終了期限", with: "2020-01-30"
+        click_button 'create_button'
+        wait.until{ expect(page).to have_content "test Title admin" }
+      end
+    end
   end
 end

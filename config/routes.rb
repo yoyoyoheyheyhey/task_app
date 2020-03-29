@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :tasks
+  end
   root to: 'sessions#new'
   get '/login', to: "sessions#new"
   namespace :admin do
