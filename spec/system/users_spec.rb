@@ -30,13 +30,23 @@ RSpec.describe "Users", type: :system do
     context "一般ユーザーがログインをした場合" do
       before do
         @user = FactoryBot.create(:user, name: 'test User1',
-                                        email: 'test1@example.com')
+                                         email: 'test1@example.com',
+                                         created_at: '2020-01-01 01:01:01',
+                                         updated_at: '2020-01-02 01:01:01')
         @task = FactoryBot.create(:task, title: "test Title 1",
-                                        user_id: @user.id)
+                                         end_date: '2020-01-31',
+                                         user_id: @user.id,
+                                         created_at: '2020-01-01 01:01:01',
+                                         updated_at: '2020-01-02 01:01:01')
         @other = FactoryBot.create(:user, name: 'test User2',
-                                         email: 'test2@example.com')
+                                          email: 'test2@example.com',
+                                          created_at: '2020-01-01 01:01:01',
+                                          updated_at: '2020-01-02 01:01:01')
         @other_task = FactoryBot.create(:task, title: "test Title 2",
-                                              user_id: @other.id)
+                                               end_date: '2020-01-31',
+                                               user_id: @other.id,
+                                               created_at: '2020-01-01 01:01:01',
+                                               updated_at: '2020-01-02 01:01:01')
         visit new_session_path
         fill_in "session_email", with: "test1@example.com"
         fill_in "session_password", with: "testtest"
@@ -45,6 +55,14 @@ RSpec.describe "Users", type: :system do
       it "自分のタスク一覧画面にリダイレクトされること" do
         wait.until{ expect(page).to have_content "test Title 1" }
         wait.until{ expect(page).to_not have_content "test Title 2" }
+      end
+
+      it "自分のタスク詳細画面へページ遷移できること" do
+        wait.until{ all(".border-content")[0].click_link "詳細" }
+        wait.until{ expect(page).to have_content "タスク詳細" }
+        wait.until{ expect(page).to have_content "2020年01月31日" }
+        wait.until{ expect(page).to have_content "2020年01月01日01時01分01秒"}
+        wait.until{ expect(page).to have_content "2020年01月02日01時01分01秒"}
       end
 
       it "別ユーザーのマイページ(詳細)にアクセスした際、自分のタスク一覧画面にリダイレクトされること" do

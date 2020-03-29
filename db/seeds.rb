@@ -6,7 +6,7 @@
     password: "testtest",
     password_confirmation: "testtest"
   )
-  2.times do |task|
+  30.times do |task|
     Task.create!(
     title: "test Title#{task + 1}",
     content: "test Content#{task + 1}",
