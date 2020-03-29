@@ -1,23 +1,12 @@
+// index 共通処理
 .index {
   max-width: 60%;
   margin: auto;
   position: relative;
   left: 50px;
-
 }
 
-// task
-.index .task_title {
-  width: 250px;
-}
-.index .task_content {
-  width: 250px;
-}
-.index .task_end_date {
-  width: 250px;
-}
 // user
-
 .index .user_name {
   width: 250px;
 }
@@ -26,6 +15,17 @@
 }
 
 // task
+.index .task_title {
+  width: 250px;
+}
+
+.index .task_content {
+  width: 250px;
+}
+.index .task_end_date {
+  width: 250px;
+}
+
 .index .inline {
   display: inline;
 }
@@ -49,12 +49,7 @@
 .index .border-header{
   border-bottom:1px solid #ccc;
 }
+
 .index .border-content{
   border-bottom:1px dashed #ccc;
-}
-
-.show {
-  display: block;
-  max-width: 8%;
-  margin-bottom: 10px;
 }
