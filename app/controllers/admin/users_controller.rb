@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :set_params, only: [:show, :edit, :update, :destroy]
   before_action :admin_user_check
+  before_action :current_user_delete_check, only: [:destroy]
   def new
     @user = User.new
   end
@@ -63,4 +64,9 @@ class Admin::UsersController < ApplicationController
   def admin_user_check
     redirect_to new_user_path, flash: {danger: "あなたは管理者ではありません!"} unless current_user.admin?
   end
+
+  def current_user_delete_check
+      redirect_to admin_users_path, flash:{ danger: "自身を削除することはできません！" }  if current_user.id == params[:id].to_i
+  end
+
 end
