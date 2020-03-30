@@ -21,7 +21,9 @@ class TasksController < ApplicationController
                                .sorted_by(params[:sort_option]).page(params[:page])
   end
 
-  def show; end
+  def show
+    @labels = @task.labels
+  end
 
   def edit; end
 
