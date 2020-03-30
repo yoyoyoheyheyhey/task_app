@@ -1,5 +1,5 @@
 <div class="form">
-  <%= form_with(model: @task,local: true) do |f| %>
+  <%= form_with(model: @task, local: true,url: which_action) do |f| %>
     <% if @task.errors.any? %>
       <p><%= pluralize(@task.errors.count, 'error') %></p>
       <ul>
@@ -19,7 +19,8 @@
     <%= f.label :status , class: 'label-control'%>
     <%=  f.select :status, [["未着手", "未着手"],["着手中", "着手中"],["完了", "完了"]] , {}, class: 'form-control'%>
     <%= f.label :priority, '優先順位' , class: 'label-control'%>
-    <%=  f.select :priority, [["低", 0],["中", 1],["高", 2]], {}, class: 'form-control'%>
+    <%= f.select :priority, [["低", 0],["中", 1],["高", 2]], {}, class: 'form-control'%>
+    <%= f.hidden_field :user_id %>
     <%= f.submit '登録', id: 'create_button', class: 'btn btn-primary' %>
     <%= link_to '戻る', tasks_path , class: 'btn btn-success'%>
   <% end %>

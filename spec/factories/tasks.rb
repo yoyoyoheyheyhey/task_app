@@ -5,5 +5,6 @@ FactoryBot.define do
     end_date { "2020-01-01" }
     status { "未着手" }
     priority { 0 }
+    user_id { 1 }
   end
 end

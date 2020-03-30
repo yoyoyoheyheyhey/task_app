@@ -1,4 +1,21 @@
 class Task < ApplicationRecord
+
+  belongs_to :user
+
+  validates :title, presence: true,
+                    length: { maximum: 30 }
+  validates :content , presence: true,
+                       length: { maximum: 255 }
+  validates :end_date, presence: true,
+                       format: { with: /\d{4}-\d{2}-\d{2}/ }
+
+  private
+
+  scope :with_user_id, -> (user_id) do
+    next if user_id.nil?
+    where(user_id: user_id)
+  end
+
   scope :with_title, -> (title) do
     next if title.blank?
     where("title Like ?", "%#{title}%")
@@ -6,7 +23,7 @@ class Task < ApplicationRecord
 
   scope :with_status, -> (status) do
     next if status.nil? || status.include?('全て')
-      where(status: status) 
+    where(status: status) 
   end
 
   scope :sorted_by, -> (sort_option) do
@@ -18,10 +35,5 @@ class Task < ApplicationRecord
       order(priority: :desc).order(created_at: :desc)
     end
   end
-
-
-  validates :title, presence: true,
-                    length: { maximum: 30 }
-  validates :content , presence: true,
-                       length: { maximum: 255 }
+  
 end

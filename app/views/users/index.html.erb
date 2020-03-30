@@ -1,0 +1,21 @@
+<div class="index">
+  <h1>ユーザー一覧</h1>
+  <table class="table table-hover">
+    <thead class="thead-default">
+      <tr>
+        <th><%= User.human_attribute_name(:name) %></th>
+        <th><%= User.human_attribute_name(:email) %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr class="border-content">
+        <td class="user_name"><%= user.name %></td>
+        <td class="user_email"><%= user.email %></td>
+        <td><%= link_to '詳細', user_path(user.id), class: 'btn btn-info' %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
