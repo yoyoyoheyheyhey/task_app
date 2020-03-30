@@ -1,0 +1,16 @@
+.labels {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  padding: 10px;
+}
+
+.labels label {
+  margin-right:10px;
+}
+
+.labels input {
+  margin-right:5px;
+}
