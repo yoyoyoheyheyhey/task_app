@@ -24,3 +24,9 @@ end
   password: "testtest",
   password_confirmation: "testtest"
 )
+
+Label.create!(name: "Ruby")
+Label.create!(name: "Python")
+Label.create!(name: "Java")
+Label.create!(name: "PHP")
+Label.create!(name: "VB.NET")

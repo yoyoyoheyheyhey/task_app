@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_params, only: [:show, :edit, :update, :destroy]
+  before_action :labels_find, only: [:index, :new, :edit, :create, :update]
   def new
     @task = Task.new
   end
@@ -20,7 +21,9 @@ class TasksController < ApplicationController
                                .sorted_by(params[:sort_option]).page(params[:page])
   end
 
-  def show; end
+  def show
+    @labels = @task.labels
+  end
 
   def edit; end
 
@@ -40,10 +43,19 @@ class TasksController < ApplicationController
 
   private 
   def task_params
-    params.require(:task).permit(:title, :content, :end_date, :status, :priority)
+    params.require(:task).permit(:title, 
+                                 :content, 
+                                 :end_date, 
+                                 :status, 
+                                 :priority,
+                                 { label_ids: [] })
   end
 
   def set_params
     @task = Task.find(params[:id])
+  end
+
+  def labels_find
+    @labels = Label.all.order(updated_at: :desc)
   end
 end

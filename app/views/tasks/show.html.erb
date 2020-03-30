@@ -8,6 +8,12 @@
   <p id = "task_show_end_date", class="form-control"><%= @task.end_date.strftime("%Y年%m月%d日") %></p>
   <label for="task_show_status">状態</label>
   <p id = "task_show_status", class="form-control"><%= @task.status %></p>
+  <label>ラベル</label>
+  <div class="labels">
+    <% @labels.each do |label| %>
+      <p classs="label"><%= label.name %></p>
+    <% end %>
+  </div>
   <label for="task_show_priority">優先順位</label>
   <p id = "task_show_priority", class="form-control"><%= @task.priority %></p>
   <label for="task_show_created_at">作成日</label>

@@ -295,4 +295,30 @@ RSpec.describe "Users", type: :system do
       end
     end
   end
+  describe "ラベル機能" do
+    before do
+    end
+    context "ラベルを設定して新規タスク投稿した場合" do
+      before do
+        @user = FactoryBot.create(:user, name: "test User label", email: "testLabel@example.com")
+        FactoryBot.create(:task, title: "test Title Label", user_id: @user.id)
+        FactoryBot.create(:label, name: "Ruby")
+        visit root_path
+        fill_in "session_email", with: "testLabel@example.com"
+        fill_in "session_password", with: "testtest"
+        click_button "ログイン"
+
+      end
+      it "対象のタスクの詳細画面に対象のラベルが表示されていること" do
+        visit new_task_path
+        fill_in "task_title", with: "test Title Label" 
+        fill_in "task_content", with: "test Content Label"
+        check "Ruby"
+        fill_in "終了期限", with: "2020-01-30"
+        click_button 'create_button'
+        wait.until{ all(".border-content")[0].click_link "詳細" }
+        wait.until{ expect(page).to have_content "Ruby" }
+      end
+    end
+  end
 end
