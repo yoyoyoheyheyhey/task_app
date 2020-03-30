@@ -5,6 +5,14 @@ rails db:create
 rails db:migrate
 rails db:seed
 rails server
+
+管理者ユーザーでのログイン方法
+login_id: test999@example.com
+password: testtest
+
+一般ユーザーでのログイン方法
+login_id: test1@example.com
+password: testtest
 ```
 
 # テーブル定義
