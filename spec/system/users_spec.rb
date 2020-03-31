@@ -299,9 +299,9 @@ RSpec.describe "Users", type: :system do
     before do
       @user = FactoryBot.create(:user, name: "test User label", email: "testLabel@example.com")
       FactoryBot.create(:task, title: "test Title Label", user_id: @user.id)
-      FactoryBot.create(:label, name: "Ruby")
-      FactoryBot.create(:label, name: "Java")
-      FactoryBot.create(:label, name: "Python")
+      FactoryBot.create(:label, name: "Ruby", user_id: @user.id)
+      FactoryBot.create(:label, name: "Java", user_id: @user.id)
+      FactoryBot.create(:label, name: "Python", user_id: @user.id)
       visit root_path
       fill_in "session_email", with: "testLabel@example.com"
       fill_in "session_password", with: "testtest"
@@ -327,6 +327,25 @@ RSpec.describe "Users", type: :system do
         click_button "create_button"
         wait.until{ all(".border-content")[0].click_link "詳細" }
         wait.until{ expect(page).to have_content "Java" }
+      end
+    end
+    context "一般ユーザーにて自身専用のラベルを作成した場合" do
+      it "新規画面に登録したラベルが表示されること" do
+        wait.until{ click_link "user_label_create" }
+        fill_in "label_name", with: "uuser Ruby"
+        click_button "登録する"
+        wait.until{ expect(page).to have_content "user Ruby" }
+      end
+    end
+    context "一般ユーザーにて自身専用のラベルを修正した場合" do
+      it "新規がめんに修正したラベルが表示されること" do
+        wait.until{ click_link "user_label_create" }
+        fill_in "label_name", with: "uuser Ruby"
+        click_button "登録する"
+        wait.until{ all(".label_edit")[0].click_link "編集" }
+        fill_in "label_name", with: "user Ruby Update"
+        click_button "更新する"
+        wait.until{ expect(page).to have_content "user Ruby Update" }
       end
     end
   end
