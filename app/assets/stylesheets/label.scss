@@ -7,10 +7,42 @@
   padding: 10px;
 }
 
+.label_new{
+  max-width: 50%;
+  margin: auto;
+}
+
+.label_form {
+  max-width: 10%;
+  margin: auto;
+  position: relative;
+  left: -25%;
+  top: -100 px;
+}
+
+.label_form .button{
+  margin-top: 5px;
+}
+
+
 .labels label {
   margin-right:10px;
 }
 
 .labels input {
   margin-right:5px;
+}
+
+.label_new{
+  display: flex;
+}
+
+.label_new a {
+  margin: 5px;
+}
+.label_index {
+  position: relative;
+}
+.label_index th {
+  width: 200px;
 }
