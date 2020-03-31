@@ -56,6 +56,7 @@ class TasksController < ApplicationController
   end
 
   def labels_find
-    @labels = Label.all.order(updated_at: :desc)
+    @labels = Label.all.where(user_id: 0).order(updated_at: :desc)
+    @private_labels = current_user.labels.order(updated_at: :desc)
   end
 end

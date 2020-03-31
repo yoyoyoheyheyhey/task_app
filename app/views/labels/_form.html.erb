@@ -1,6 +1,6 @@
 <div class="label_new">
   <div class="label_form">
-  <%= form_with(model: @label, local: true) do |f| %>
+  <%= form_with(model: @label, local: true,class: "form_click") do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name %>
     <%= f.submit class: 'btn btn-primary button'%>

@@ -14,10 +14,8 @@
 
 .label_form {
   max-width: 10%;
-  margin: auto;
-  position: relative;
-  left: -25%;
-  top: -100 px;
+  margin-bottom: auto;
+  margin-right: auto;
 }
 
 .label_form .button{
@@ -27,6 +25,7 @@
 
 .labels label {
   margin-right:10px;
+  position: relative;
 }
 
 .labels input {
