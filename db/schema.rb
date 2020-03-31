@@ -29,8 +29,7 @@ ActiveRecord::Schema.define(version: 2020_03_31_041503) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", default: 0, null: false
-    t.index ["user_id"], name: "index_labels_on_user_id"
+    t.integer "user_id", default: 0, null: false
   end
 
   create_table "tasks", force: :cascade do |t|

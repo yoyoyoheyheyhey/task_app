@@ -338,7 +338,7 @@ RSpec.describe "Users", type: :system do
       end
     end
     context "一般ユーザーにて自身専用のラベルを修正した場合" do
-      it "新規がめんに修正したラベルが表示されること" do
+      it "新規画面に修正したラベルが表示されること" do
         wait.until{ click_link "user_label_create" }
         fill_in "label_name", with: "uuser Ruby"
         click_button "登録する"

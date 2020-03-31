@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_params, only: [:show, :edit, :update, :destroy]
   before_action :labels_find, only: [:index, :new, :edit, :create, :update]
+  
   def new
     @task = Task.new
   end
@@ -43,12 +44,12 @@ class TasksController < ApplicationController
 
   private 
   def task_params
-    params.require(:task).permit(:title, 
-                                 :content, 
-                                 :end_date, 
-                                 :status, 
-                                 :priority,
-                                 { label_ids: [] })
+  params.require(:task).permit(:title, 
+                                  :content, 
+                                  :end_date, 
+                                  :status, 
+                                  :priority,
+                                  { label_ids: [] })
   end
 
   def set_params
@@ -57,6 +58,6 @@ class TasksController < ApplicationController
 
   def labels_find
     @labels = Label.all.where(user_id: 0).order(updated_at: :desc)
-    @private_labels = current_user.labels.order(updated_at: :desc)
+    @private_labels = Label.where(user_id: current_user.id).order(updated_at: :desc)
   end
 end

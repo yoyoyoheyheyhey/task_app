@@ -1,12 +1,14 @@
 class LabelsController < ApplicationController
   before_action :set_params, only: [:show, :edit, :update, :destroy]
   before_action :labels_faind, only: [:new, :edit, :create, :update]
+
   def new
     @label = Label.new
   end
 
   def create
-    @label = current_user.labels.build(label_params)
+    @label = Label.new(label_params)
+    @label.user_id = current_user.id
     if @label.save
       redirect_to new_label_path, notice: "登録に成功しました！"
     else
@@ -15,8 +17,7 @@ class LabelsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit: end
 
   def update
     if @label.update(label_params)
@@ -31,6 +32,7 @@ class LabelsController < ApplicationController
     @label.destroy
     redirect_to new_label_path, flash: {danger: '削除しました！'} 
   end
+  
   private
   def label_params
     params.require(:label).permit(:name)
