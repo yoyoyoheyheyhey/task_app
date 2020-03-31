@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'labels/new'
+  get 'labels/edit'
+  get 'labels/index'
   root to: 'sessions#new'
   get '/login', to: "sessions#new"
   namespace :admin do
