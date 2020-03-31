@@ -28,7 +28,7 @@ class TasksController < ApplicationController
   def edit; end
 
   def update
-    if current_user.tasks.update(task_params)
+    if current_user.tasks.find(@task.id).update(task_params)
       redirect_to tasks_path, notice: '更新に成功しました！'
     else
       flash.now[:danger] = '更新に失敗しました！'
