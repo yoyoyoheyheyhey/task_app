@@ -299,9 +299,12 @@ RSpec.describe "Users", type: :system do
     before do
       @user = FactoryBot.create(:user, name: "test User label", email: "testLabel@example.com")
       FactoryBot.create(:task, title: "test Title Label", user_id: @user.id)
-      FactoryBot.create(:label, name: "Ruby", user_id: @user.id)
+      @task = FactoryBot.create(:task, title: "test Title Label Ruby", user_id: @user.id)
+      FactoryBot.create(:task, title: "test Title Label Java", user_id: @user.id)
+      @label = FactoryBot.create(:label, name: "Ruby")
       FactoryBot.create(:label, name: "Java", user_id: @user.id)
       FactoryBot.create(:label, name: "Python", user_id: @user.id)
+      FactoryBot.create(:labelling,label_id: @label.id,task_id: @task.id)
       visit root_path
       fill_in "session_email", with: "testLabel@example.com"
       fill_in "session_password", with: "testtest"
@@ -337,15 +340,15 @@ RSpec.describe "Users", type: :system do
         wait.until{ expect(page).to have_content "user Ruby" }
       end
     end
-    context "一般ユーザーにて自身専用のラベルを修正した場合" do
-      it "新規画面に修正したラベルが表示されること" do
-        wait.until{ click_link "user_label_create" }
-        fill_in "label_name", with: "uuser Ruby"
-        click_button "登録する"
-        wait.until{ all(".label_edit")[0].click_link "編集" }
-        fill_in "label_name", with: "user Ruby Update"
-        click_button "更新する"
-        wait.until{ expect(page).to have_content "user Ruby Update" }
+
+    context "タスク一覧にてラベルを選択した状態で検索をした場合" do
+      it "対象のラベルに紐づいているタスクが表示されること" do
+        visit tasks_path
+        check "Ruby"
+        wait.until{ expect(page).to have_content "test Title Label Java" }
+        click_button "検索"
+        wait.until{ expect(page).to have_content "test Title Label Ruby" }
+        wait.until{ expect(page).to_not have_content "test Title Label Java" }
       end
     end
   end

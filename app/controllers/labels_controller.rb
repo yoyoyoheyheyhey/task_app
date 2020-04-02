@@ -17,7 +17,7 @@ class LabelsController < ApplicationController
     end
   end
 
-  def edit: end
+  def edit; end
 
   def update
     if @label.update(label_params)
@@ -32,7 +32,7 @@ class LabelsController < ApplicationController
     @label.destroy
     redirect_to new_label_path, flash: {danger: '削除しました！'} 
   end
-  
+
   private
   def label_params
     params.require(:label).permit(:name)
@@ -43,7 +43,7 @@ class LabelsController < ApplicationController
   end
 
   def labels_faind
-    @labels = Label.all.where(user_id: current_user.id)
+    @labels = Label.all.where(user_id: current_user.id).page(params[:page])
   end
 
 end

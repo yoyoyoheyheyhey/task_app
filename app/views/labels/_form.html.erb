@@ -11,6 +11,12 @@
     <tr>
       <th>ラベル名</thr>
     <tr>
+
+    <div>
+      <%= paginate @labels %>
+      <%= page_entries_info @labels %>
+    </div>
+
     <% @labels.each do |label| %>
       <tr>
       <td class="label_name"><%= label.name %></td>

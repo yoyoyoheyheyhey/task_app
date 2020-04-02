@@ -15,6 +15,16 @@
 }
 
 // task
+.index .container {
+  display: flex;
+}
+
+.index .search_right {
+  position: relative;
+  top: -15px;
+}
+
+
 .index .task_title {
   width: 250px;
 }
@@ -33,6 +43,9 @@
 
 .index input {
   margin-right: 1px;
+}
+.index .button{
+  padding-bottom: 25px;
 }
 
 .index select {
@@ -53,4 +66,9 @@
 
 .index .border-content{
   border-bottom:1px dashed #ccc;
+}
+
+.index .label-control {
+  margin-top: 10px;
+  display: block;
 }
