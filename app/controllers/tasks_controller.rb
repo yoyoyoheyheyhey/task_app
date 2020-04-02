@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_params, only: [:show, :edit, :update, :destroy]
+  before_action :labels_find, only: [:index, :new, :edit, :create, :update]
+  
   def new
     @task = Task.new
   end
@@ -15,17 +17,21 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = current_user.tasks.with_title(params[:title])
-                               .with_status(params[:status])
-                               .sorted_by(params[:sort_option]).page(params[:page])
+        @labels = Label.all
+        @tasks = current_user.tasks.with_title(params[:title]).
+                                    with_status(params[:status]).
+                                    with_label_name(params[:label_ids]).
+                                    sorted_by(params[:sort_option]).page(params[:page])
   end
 
-  def show; end
+  def show
+    @labels = @task.labels
+  end
 
   def edit; end
 
   def update
-    if current_user.tasks.update(task_params)
+    if current_user.tasks.find(@task.id).update(task_params)
       redirect_to tasks_path, notice: '更新に成功しました！'
     else
       flash.now[:danger] = '更新に失敗しました！'
@@ -40,10 +46,20 @@ class TasksController < ApplicationController
 
   private 
   def task_params
-    params.require(:task).permit(:title, :content, :end_date, :status, :priority)
+  params.require(:task).permit(:title, 
+                                  :content, 
+                                  :end_date, 
+                                  :status, 
+                                  :priority,
+                                  { label_ids: [] })
   end
 
   def set_params
     @task = Task.find(params[:id])
+  end
+
+  def labels_find
+    @labels = Label.all.where(user_id: 0).order(updated_at: :desc)
+    @private_labels = Label.where(user_id: current_user.id).order(updated_at: :desc)
   end
 end

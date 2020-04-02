@@ -295,4 +295,61 @@ RSpec.describe "Users", type: :system do
       end
     end
   end
+  describe "ラベル機能" do
+    before do
+      @user = FactoryBot.create(:user, name: "test User label", email: "testLabel@example.com")
+      FactoryBot.create(:task, title: "test Title Label", user_id: @user.id)
+      @task = FactoryBot.create(:task, title: "test Title Label Ruby", user_id: @user.id)
+      FactoryBot.create(:task, title: "test Title Label Java", user_id: @user.id)
+      @label = FactoryBot.create(:label, name: "Ruby")
+      FactoryBot.create(:label, name: "Java", user_id: @user.id)
+      FactoryBot.create(:label, name: "Python", user_id: @user.id)
+      FactoryBot.create(:labelling,label_id: @label.id,task_id: @task.id)
+      visit root_path
+      fill_in "session_email", with: "testLabel@example.com"
+      fill_in "session_password", with: "testtest"
+      click_button "ログイン"
+    end
+    context "ラベルを設定して新規タスク投稿した場合" do
+      it "対象のタスクの詳細画面に対象のラベルが表示されていること" do
+        visit new_task_path
+        fill_in "task_title", with: "test Title Label" 
+        fill_in "task_content", with: "test Content Label"
+        check "Ruby"
+        fill_in "終了期限", with: "2020-01-30"
+        click_button 'create_button'
+        wait.until{ all(".border-content")[0].click_link "詳細" }
+        wait.until{ expect(page).to have_content "Ruby" }
+      end
+    end
+    context "ラベルを設定してタスクを編集した場合" do
+      it "対象のタスク詳細画面に編集後のラベルが表示されていること" do
+        wait.until{ all(".border-content")[0].click_link "編集" }
+        check "Java"
+        fill_in "終了期限", with: "2020-01-30"
+        click_button "create_button"
+        wait.until{ all(".border-content")[0].click_link "詳細" }
+        wait.until{ expect(page).to have_content "Java" }
+      end
+    end
+    context "一般ユーザーにて自身専用のラベルを作成した場合" do
+      it "新規画面に登録したラベルが表示されること" do
+        wait.until{ click_link "user_label_create" }
+        fill_in "label_name", with: "uuser Ruby"
+        click_button "登録する"
+        wait.until{ expect(page).to have_content "user Ruby" }
+      end
+    end
+
+    context "タスク一覧にてラベルを選択した状態で検索をした場合" do
+      it "対象のラベルに紐づいているタスクが表示されること" do
+        visit tasks_path
+        check "Ruby"
+        wait.until{ expect(page).to have_content "test Title Label Java" }
+        click_button "検索"
+        wait.until{ expect(page).to have_content "test Title Label Ruby" }
+        wait.until{ expect(page).to_not have_content "test Title Label Java" }
+      end
+    end
+  end
 end

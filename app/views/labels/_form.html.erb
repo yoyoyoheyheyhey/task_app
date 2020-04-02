@@ -1,0 +1,29 @@
+<div class="label_new">
+  <div class="label_form">
+  <%= form_with(model: @label, local: true,class: "form_click") do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.submit class: 'btn btn-primary button'%>
+  <% end %>
+  </div>
+  <div class="label_index">
+    <table>
+    <tr>
+      <th>ラベル名</thr>
+    <tr>
+
+    <div>
+      <%= paginate @labels %>
+      <%= page_entries_info @labels %>
+    </div>
+
+    <% @labels.each do |label| %>
+      <tr>
+      <td class="label_name"><%= label.name %></td>
+      <td class="label_edit"><%= link_to "編集", edit_label_path(label.id),class: "btn btn-success" %></td>
+      <td class="label_delete"><%= link_to "削除", label_path(label.id),method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "btn btn-danger" %></td>
+      <tr>
+    <% end %>
+    <table>
+  </div>
+</div>
