@@ -23,6 +23,10 @@ gem 'dotenv-rails'
 gem 'unicorn' # アプリケーションサーバのunicorn
 gem 'mini_racer', platforms: :ruby # デプロイ時に必要
 
+
+gem 'webdrivers'
+gem 'selenium-webdriver'
+
 group :development, :test do
   gem 'byebug' 
   gem 'rspec-rails', '~> 3.8'
@@ -48,8 +52,6 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'webdrivers'
-  gem 'selenium-webdriver'
   gem 'database_cleaner'
 end
 
