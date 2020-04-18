@@ -15,6 +15,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'kaminari'
 gem 'bootstrap'
 gem 'bcrypt', '3.1.11'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog-aws'
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'byebug' 
