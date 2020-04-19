@@ -26,8 +26,8 @@ gem 'dotenv-rails'
 gem 'webdrivers'
 gem 'selenium-webdriver'
 
-#gem 'jquery-rails'
-#gem 'jquery-ui-rails'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 # gem 'less-rails'
 # JavaScript のエンジンである v8 を Ruby から使えるようにする
