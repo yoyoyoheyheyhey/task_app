@@ -9,10 +9,12 @@ Rails.application.configure do
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
+  config.force_ssl = true
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+  config.public_file_server.enabled = true
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
@@ -31,6 +33,8 @@ Rails.application.configure do
   config.assets.css_compressor = :sass
   config.assets.enabled = true
   config.assets.precompile += %w(*.js *.less *.css *.erb *.scss)
+
+  config.assets.digest = true
   # config.serve_static_assets = true
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
