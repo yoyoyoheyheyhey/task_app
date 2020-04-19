@@ -1,8 +1,10 @@
 <div class="form">
   <h1>ユーザー詳細</h1>
-  <% if @user.image.url %>
-    <%= image_tag @user.image.url %>
-  <% end %>
+  <!-- 
+  #<% if @user.image.url %>
+   # <%= image_tag @user.image.url %>
+  #<% end %>
+  -->
   <label for="user_show_title">タイトル</label>
   <p id = "user_show_title", class="form-control"><%= @user.name %></p>
   <label for="user_show_content">内容</label>
