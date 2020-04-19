@@ -37,7 +37,7 @@ gem 'jquery-ui-rails'
 # gem 'execjs'
 
 # Twitter社が提供しているCSSとJavaScriptのフレームワーク
-#gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails'
 
 group :development, :test do
   gem 'byebug' 
