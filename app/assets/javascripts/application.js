@@ -13,7 +13,6 @@
 //= require rails-ujs
 //= require activestorage
 //= bootstrap-sprockets
-//= require toastr
 //=require jquery_ujs
 //= require jquery/dist/jquery.js
 //= require bootstrap/dist/js/bootstrap.min
