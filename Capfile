@@ -23,7 +23,7 @@ require 'capistrano/rails/assets'
 require 'capistrano/rails/migrations'
 # require 'capistrano/passenger'
 require 'capistrano3/unicorn'
-#set :assets_roles, [:web, :app]
+set :assets_roles, [:web, :app]
 server '18.178.57.8', roles: %w(web app)
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
