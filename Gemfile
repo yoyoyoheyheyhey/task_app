@@ -30,6 +30,16 @@ gem 'selenium-webdriver'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
+# gem 'less-rails'
+# JavaScript のエンジンである v8 を Ruby から使えるようにする
+# gem 'libv8', '~> 3.11.8'
+#gem 'therubyracer'
+# JavaScriptコードを実行するためのエンジン
+# gem 'execjs'
+
+# Twitter社が提供しているCSSとJavaScriptのフレームワーク
+gem 'twitter-bootstrap-rails'
+
 group :development, :test do
   gem 'byebug' 
   gem 'rspec-rails', '~> 3.8'
