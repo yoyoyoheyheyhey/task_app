@@ -27,6 +27,8 @@ gem 'mini_racer', platforms: :ruby # デプロイ時に必要
 gem 'webdrivers'
 gem 'selenium-webdriver'
 
+gem 'jquery-rails'
+
 group :development, :test do
   gem 'byebug' 
   gem 'rspec-rails', '~> 3.8'
