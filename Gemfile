@@ -28,6 +28,7 @@ gem 'webdrivers'
 gem 'selenium-webdriver'
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 group :development, :test do
   gem 'byebug' 
