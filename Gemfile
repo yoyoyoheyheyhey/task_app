@@ -20,8 +20,7 @@ gem 'mini_magick'
 gem 'fog-aws'
 gem 'dotenv-rails'
 
-gem 'unicorn' # アプリケーションサーバのunicorn
-gem 'mini_racer', platforms: :ruby # デプロイ時に必要
+# gem 'unicorn' # アプリケーションサーバのunicorn
 
 
 gem 'webdrivers'
@@ -69,3 +68,7 @@ group :test do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+group :production, :staging do
+  gem 'unicorn'
+  gem 'mini_racer', platforms: :ruby # デプロイ時に必要
+end
