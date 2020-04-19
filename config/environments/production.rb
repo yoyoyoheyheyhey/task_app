@@ -30,7 +30,7 @@ Rails.application.configure do
   config.assets.compile = true
   config.assets.css_compressor = :sass
   config.assets.enabled = true
-  config.assets.precompile += %w(*.js *.less *.css *.erb)
+  config.assets.precompile += %w(*.js *.less *.css *.erb *.cscc)
   # config.serve_static_assets = true
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
