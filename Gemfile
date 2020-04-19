@@ -11,9 +11,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-gem 'bootsnap', '>= 1.1.0', require: false
+#gem 'bootsnap', '>= 1.1.0', require: false
 gem 'kaminari'
-gem 'bootstrap'
+#gem 'bootstrap'
 gem 'bcrypt', '3.1.11'
 gem 'carrierwave'
 gem 'mini_magick'
@@ -26,8 +26,8 @@ gem 'dotenv-rails'
 gem 'webdrivers'
 gem 'selenium-webdriver'
 
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
+#gem 'jquery-rails'
+#gem 'jquery-ui-rails'
 
 # gem 'less-rails'
 # JavaScript のエンジンである v8 を Ruby から使えるようにする
@@ -37,7 +37,7 @@ gem 'jquery-ui-rails'
 # gem 'execjs'
 
 # Twitter社が提供しているCSSとJavaScriptのフレームワーク
-gem 'twitter-bootstrap-rails'
+#gem 'twitter-bootstrap-rails'
 
 group :development, :test do
   gem 'byebug' 
