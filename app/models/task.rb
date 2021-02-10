@@ -35,8 +35,8 @@ class Task < ApplicationRecord
   end
 
   scope :with_label_ids, -> (label_ids) do
-    next if label_ids.blank?
-    joins(:labels).where(labels: {id: label_ids})
+    next if label_ids&.reject(&:blank?).blank?
+    joins(:labels).where(labels: { id: label_ids })
   end
 
 end
