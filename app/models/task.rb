@@ -11,7 +11,7 @@ class Task < ApplicationRecord
                        format: { with: /\d{4}-\d{2}-\d{2}/ }
 
   scope :with_user_id, -> (user_id) do
-    next if user_id.nil?
+    next if user_id.blank?
     where(user_id: user_id)
   end
 
@@ -21,7 +21,7 @@ class Task < ApplicationRecord
   end
 
   scope :with_status, -> (status) do
-    next if status.nil? || status.include?('全て')
+    next if status.blank? || status.include?('全て')
     where(status: status) 
   end
 
