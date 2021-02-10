@@ -26,13 +26,11 @@ class Task < ApplicationRecord
   end
 
   scope :sorted_by, -> (sort_option) do
-
-    if sort_option.nil?
-      order(priority: :desc).order(created_at: :desc)
-    elsif sort_option.include?('end_date')
+    case sort_option
+    when 'end_date'
       order(end_date: :desc)
     else
-      order(priority: :desc).order(created_at: :desc)
+      order(created_at: :desc, priority: :desc)
     end
   end
 
