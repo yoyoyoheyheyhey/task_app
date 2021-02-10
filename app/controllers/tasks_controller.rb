@@ -17,8 +17,8 @@ class TasksController < ApplicationController
   end
 
   def index
-        @labels = Label.all
-                                with_label_ids(params[:label_ids]).
+    @labels = Label.all
+    @tasks = current_user.tasks.filtered_by(*filter_params).page(params[:page])
   end
 
   def show
@@ -58,5 +58,15 @@ class TasksController < ApplicationController
   def labels_find
     @labels = Label.all.where(user_id: 0).order(updated_at: :desc)
     @private_labels = Label.where(user_id: current_user.id).order(updated_at: :desc)
+  end
+
+  def filter_params
+    params.permit(
+      :with_title,
+      :with_status,
+      :with_priority,
+      :sorted_by,
+      with_label_ids: [],
+    ).delete_if{|key, value| value.blank? }.to_h
   end
 end
