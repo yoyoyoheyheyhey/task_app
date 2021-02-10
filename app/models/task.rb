@@ -25,7 +25,6 @@ class Task < ApplicationRecord
     return all if (allowable_scope_list | filter_params.keys).size != allowable_scope_list.size
 
     filter_params.inject(self) do |task, param|
-      next unless allowable_scope_list.include?(param[0])
       task.send(param[0], param[1])
     end
   end
