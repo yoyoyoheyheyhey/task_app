@@ -30,6 +30,11 @@ class Task < ApplicationRecord
     where(priority: priority) 
   end
 
+  scope :with_label_ids, -> (label_ids) do
+    next if label_ids&.reject(&:blank?).blank?
+    joins(:labels).where(labels: { id: label_ids })
+  end
+
   scope :sorted_by, -> (sort_option) do
     case sort_option
     when 'end_date'
@@ -37,11 +42,6 @@ class Task < ApplicationRecord
     else
       order(created_at: :desc, priority: :desc)
     end
-  end
-
-  scope :with_label_ids, -> (label_ids) do
-    next if label_ids&.reject(&:blank?).blank?
-    joins(:labels).where(labels: { id: label_ids })
   end
 
 end
