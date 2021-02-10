@@ -5,25 +5,28 @@
       <div class="row">
         <div class="col-xs-10 container">
           <div class="search_left">
-            <%= f.label :title, "タイトル" %>
-            <%= f.text_field :title , class: 'form-inline'%>
-            <%= f.label :status, "状態" %>
-            <%=  f.select :status, [["全て", "全て"],["未着手", "未着手"],["着手中", "着手中"],["完了", "完了"]] %>
-            <%= f.label :sort_option, "優先順位" %>
-            <%=  f.select :sort_option, [["低", 0],["中", 1],["高", 2]], name: :sort_option %>
+            <%= f.label :with_title, "タイトル" %>
+            <%= f.text_field :with_title , class: 'form-inline'%>
+
+            <%= f.label :with_status, "状態" %>
+            <%=  f.select :with_status, %w[全て 未着手 着手中 完了].map{|str| [str, str] } %>
+
+            <%= f.label :with_priority, "優先順位" %>
+            <%=  f.select :with_priority, %w[低 中 高].map.with_index{|str, idx| [str, idx] } %>
 
             <%= f.label 'ラベル', class: 'label-control' %>
             <div class="labels">
-              <%= f.collection_check_boxes(:label_ids, @labels, :id, :name) %>
+              <%= f.collection_check_boxes(:with_label_ids, @labels, :id, :name) %>
             </div>
             <%= f.label '自分専用ラベル', class: 'label-control' %>
             <div class="labels">
-              <%= f.collection_check_boxes(:label_ids, @private_labels, :id, :name) %>
+              <%= f.collection_check_boxes(:with_label_ids, @private_labels, :id, :name) %>
             </div>
           </div>
+
           <div class="search_right">
             <%= f.submit "検索",name: 'search',class: "btn btn-primary h-25 inline button" %>
-            <%= link_to '終了期限でソート', tasks_path(sort_option: 'end_date'), meshod: :post ,class: 'btn btn-primary inline'%>
+            <%= link_to '終了期限でソート', tasks_path(sorted_by: 'end_date'), meshod: :post ,class: 'btn btn-primary inline'%>
           </div>
         </div>
       </div>
