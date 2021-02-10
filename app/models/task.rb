@@ -10,6 +10,26 @@ class Task < ApplicationRecord
   validates :end_date, presence: true,
                        format: { with: /\d{4}-\d{2}-\d{2}/ }
 
+
+  scope :filtered_by, -> (*filter_params) do
+    return all if filter_params.blank?
+
+    allowable_scope_list = %w[
+      with_user_id
+      with_title
+      with_status
+      with_priority
+      with_label_ids
+      sorted_by
+    ]
+    return all if (allowable_scope_list | filter_params.keys).size != allowable_scope_list.size
+
+    filter_params.inject(self) do |task, param|
+      next unless allowable_scope_list.include?(param[0])
+      task.send(param[0], param[1])
+    end
+  end
+
   scope :with_user_id, -> (user_id) do
     next if user_id.blank?
     where(user_id: user_id)
