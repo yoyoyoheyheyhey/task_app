@@ -11,7 +11,7 @@ class Task < ApplicationRecord
                        format: { with: /\d{4}-\d{2}-\d{2}/ }
 
 
-  scope :filtered_by, -> (*filter_params) do
+  scope :filtered_by, -> (filter_params) do
     return all if filter_params.blank?
 
     allowable_scope_list = %w[

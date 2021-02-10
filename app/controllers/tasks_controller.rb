@@ -18,7 +18,7 @@ class TasksController < ApplicationController
 
   def index
     @labels = Label.all
-    @tasks = current_user.tasks.filtered_by(*filter_params).page(params[:page])
+    @tasks = current_user.tasks.filtered_by(filter_params).page(params[:page])
   end
 
   def show
