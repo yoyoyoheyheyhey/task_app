@@ -25,6 +25,11 @@ class Task < ApplicationRecord
     where(status: status) 
   end
 
+  scope :with_priority, -> (priority) do
+    next if priority.blank?
+    where(priority: priority) 
+  end
+
   scope :sorted_by, -> (sort_option) do
     case sort_option
     when 'end_date'
