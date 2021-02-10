@@ -18,10 +18,7 @@ class TasksController < ApplicationController
 
   def index
         @labels = Label.all
-        @tasks = current_user.tasks.with_title(params[:title]).
-                                    with_status(params[:status]).
-                                    with_label_name(params[:label_ids]).
-                                    sorted_by(params[:sort_option]).page(params[:page])
+                                with_label_ids(params[:label_ids]).
   end
 
   def show

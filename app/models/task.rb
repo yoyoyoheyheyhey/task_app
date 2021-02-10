@@ -38,38 +38,9 @@ class Task < ApplicationRecord
     end
   end
 
-  scope :with_label_name, -> (label_id) do
-    next if label_id.nil?
-    label_flg = false
-    labels = []
-    # label_id.each_with_index do |label, i|
-    label_id.each do |label|
-      unless label.blank?
-        label_flg = true
-
-        #該当するラベルは全て取得する
-        labels.push(label) 
-
-        # 該当するラベルに全て一致するタスクのみ取得
-        # unless label_id[i+1].nil? && label_id[i+1] == "" 
-        #   labels.push("#{label} AND labellings.label_id =") 
-        # else
-        #   labels.push(label) 
-        # end
-
-      end
-    end
-
-    next unless label_flg
-    # 該当するラベルは全て取得する
-    joins(:labellings).where("labellings.label_id IN ( ? )", labels) 
-
-    # 該当するラベルに全て一致するタスクを取得する場合の処理
-    # labels = labels.join(',')
-    # labels = labels.gsub(',', ' ')
-    # labels = labels.gsub("'",' ')
-    # labels.slice!(-25..-1)
-    # joins(:labellings).where("labellings.label_id = #{labels} ") 
-    
+  scope :with_label_ids, -> (label_ids) do
+    next if label_ids.blank?
+    joins(:labels).where(labels: {id: label_ids})
   end
+
 end
