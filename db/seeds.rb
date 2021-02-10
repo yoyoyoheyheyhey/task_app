@@ -28,3 +28,11 @@ end
     Labelling.create(task_id: task.id, label_id: Label.all.sample.id)
   end
 end  
+
+@user = User.create!(
+  name: "test User999",
+  email: "test999@example.com",
+  admin: true,
+  password: "testtest",
+  password_confirmation: "testtest"
+)
