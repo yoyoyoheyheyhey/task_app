@@ -10,8 +10,6 @@ class Task < ApplicationRecord
   validates :end_date, presence: true,
                        format: { with: /\d{4}-\d{2}-\d{2}/ }
 
-  private
-
   scope :with_user_id, -> (user_id) do
     next if user_id.nil?
     where(user_id: user_id)
